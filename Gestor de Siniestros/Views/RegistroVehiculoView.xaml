@@ -1,0 +1,335 @@
+﻿<Window x:Class="Gestor_de_Siniestros.Views.RegistroVehiculoView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Gestor_de_Siniestros.Views" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        mc:Ignorable="d"
+        Title="RegistroVehiculoView" Height="850" Width="500"
+        AllowsTransparency="True" Background="Transparent"
+        WindowStyle="None" ResizeMode="NoResize">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="61*"/>
+                <RowDefinition Height="339*"/>
+            </Grid.RowDefinitions>
+
+            <Border CornerRadius="10" Grid.RowSpan="2">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#28AD56" Offset="0.0"/>
+                        <GradientStop Color="#18529D" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+
+            <StackPanel VerticalAlignment="Top" Height="106">
+                <Image Source="/Resources/automovil.png" Width="80"
+                       RenderOptions.BitmapScalingMode="Fant"/>
+                <TextBlock Text="Registro de Vehículo"
+                           FontWeight="Light"
+                           FontFamily="helvetica"
+                           FontSize="22"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           />
+            </StackPanel>
+
+            <StackPanel Grid.Row="1">
+                <StackPanel>
+                    <Label Content="Tipo de propidad"
+                           FontFamily="helvetica"
+                           FontWeight="Light"
+                           FontSize="20"
+                           Foreground="White"
+                           HorizontalAlignment="Left"
+                           Margin="125,0,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox x:Name="ComboTipoPropiedad"
+                                 FontFamily="helvetica"
+                                 FontWeight="Light"                           
+                                 FontSize="20"
+                                 HorizontalAlignment="Left"
+                                 Foreground="White"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Width="250"
+                                 HorizontalContentAlignment="Left"
+                                 Opacity="0.5"
+                                 Height="25"
+                                 Margin="125,0,0,0"
+                                 SelectedValuePath="Content">
+                            <ComboBoxItem Content="Dueño"
+                                          Foreground="Black">
+                            </ComboBoxItem>
+                            <ComboBoxItem Content="Conductor frecuente (No dueño)"
+                                          Foreground="Black">
+                            </ComboBoxItem>
+                        </ComboBox>
+                        
+                        <iconPacks:PackIconMaterial Kind="Car"
+                                            VerticalAlignment="Center" 
+                                            HorizontalAlignment="Center"
+                                            Foreground="White"/>
+                    </StackPanel>
+                    <Border Width="250"
+                        Height="2"
+                        Background="White"
+                        Opacity="0.5"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,20,0,0">
+                    <Label Content="Marca"
+                           FontFamily="helvetica"
+                           FontWeight="Light"
+                           FontSize="20"
+                           Foreground="White"
+                           HorizontalAlignment="Left"
+                           Margin="125,0,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="txtBoxMarca" 
+                             FontFamily="helvetica"
+                             FontWeight="Light"                           
+                             FontSize="20"
+                             HorizontalAlignment="Left"
+                             Foreground="White"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             Width="250"
+                             HorizontalContentAlignment="Left"
+                             Opacity="0.5"
+                             Height="25"
+                             Margin="125,0,0,0"/>
+                        <iconPacks:PackIconMaterial Kind="Car"
+                                            VerticalAlignment="Center" 
+                                            HorizontalAlignment="Center"
+                                            Foreground="White"/>
+
+                    </StackPanel>
+                    <Border Width="250"
+                    Height="2"
+                    Background="White"
+                    Opacity="0.5"/>
+                </StackPanel>
+
+
+                <StackPanel Margin="0,20,0,0">
+                    <Label Content="Modelo"
+                           FontFamily="helvetica"
+                           FontWeight="Light"
+                           FontSize="20"
+                           Foreground="White"
+                           HorizontalAlignment="Left"
+                           Margin="125,0,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="txtBoxModelo" 
+                             FontFamily="helvetica"
+                             FontWeight="Light"                           
+                             FontSize="20"
+                             HorizontalAlignment="Left"
+                             Foreground="White"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             Width="250"
+                             HorizontalContentAlignment="Left"
+                             Opacity="0.5"
+                             Height="25"
+                             Margin="125,0,0,0"/>
+                        <iconPacks:PackIconMaterial Kind="Car"
+                                            VerticalAlignment="Center" 
+                                            HorizontalAlignment="Center"
+                                            Foreground="White"/>
+                    </StackPanel>
+                    <Border Width="250"
+                    Height="2"
+                    Background="White"
+                    Opacity="0.5"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,20,0,0">
+                    <Label Content="Año"
+                           FontFamily="helvetica"
+                           FontWeight="Light"
+                           FontSize="20"
+                           Foreground="White"
+                           HorizontalAlignment="Left"
+                           Margin="125,0,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="txtBoxAño" 
+                             FontFamily="helvetica"
+                             FontWeight="Light"                           
+                             FontSize="20"
+                             HorizontalAlignment="Left"
+                             Foreground="White"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             Width="250"
+                             HorizontalContentAlignment="Left"
+                             Opacity="0.5"
+                             Height="25"
+                             Margin="125,0,0,0"/>
+                        <iconPacks:PackIconMaterial Kind="CalendarMonth"
+                                            VerticalAlignment="Center" 
+                                            HorizontalAlignment="Center"
+                                            Foreground="White"/>
+                    </StackPanel>
+                    <Border Width="250"
+                    Height="2"
+                    Background="White"
+                    Opacity="0.5"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,20,0,0">
+                    <Label Content="Color"
+                           FontFamily="helvetica"
+                           FontWeight="Light"
+                           FontSize="20"
+                           Foreground="White"
+                           HorizontalAlignment="Left"
+                           Margin="125,0,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="txtBoxColor" 
+                             FontFamily="helvetica"
+                             FontWeight="Light"                           
+                             FontSize="20"
+                             HorizontalAlignment="Left"
+                             Foreground="White"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             Width="250"
+                             HorizontalContentAlignment="Left"
+                             Opacity="0.5"
+                             Height="25"
+                             Margin="125,0,0,0"
+                             MaxLength="10"/>
+                        <iconPacks:PackIconMaterial Kind="FormatColorFill"
+                                            VerticalAlignment="Center" 
+                                            HorizontalAlignment="Center"
+                                            Foreground="White"/>
+                    </StackPanel>
+                    <Border Width="250"
+                    Height="2"
+                    Background="White"
+                    Opacity="0.5"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,20,0,0" >
+                    <Label Content="Aseguradora"
+                           FontFamily="helvetica"
+                           FontWeight="Light"
+                           FontSize="20"
+                           Foreground="White"
+                           HorizontalAlignment="Left"
+                           Margin="125,0,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="txtBoxAseguradora" 
+                             FontFamily="helvetica"
+                             FontWeight="Light"                           
+                             FontSize="20"
+                             HorizontalAlignment="Left"
+                             Foreground="White"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             Width="250"
+                             HorizontalContentAlignment="Left"
+                             Opacity="0.5"
+                             Height="25"
+                             Margin="125,0,0,0"
+                             />
+                        <iconPacks:PackIconMaterial Kind="Lock"
+                                            VerticalAlignment="Center" 
+                                            HorizontalAlignment="Center"
+                                            Foreground="White"/>
+                    </StackPanel>
+                    <Border Width="250"
+                    Height="2"
+                    Background="White"
+                    Opacity="0.5"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,20,0,0" >
+                    <Label Content="Numero de poliza"
+                           FontFamily="helvetica"
+                           FontWeight="Light"
+                           FontSize="20"
+                           Foreground="White"
+                           HorizontalAlignment="Left"
+                           Margin="125,0,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="txtBoxPoliza" 
+                             FontFamily="helvetica"
+                             FontWeight="Light"                           
+                             FontSize="20"
+                             HorizontalAlignment="Left"
+                             Foreground="White"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             Width="250"
+                             HorizontalContentAlignment="Left"
+                             Opacity="0.5"
+                             Height="25"
+                             Margin="125,0,0,0"/>
+                        <iconPacks:PackIconMaterial Kind="IdCard"
+                                            VerticalAlignment="Center" 
+                                            HorizontalAlignment="Center"
+                                            Foreground="White"/>
+                    </StackPanel>
+                    <Border Width="250"
+                    Height="2"
+                    Background="White"
+                    Opacity="0.5"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,20,0,0">
+                    <Label Content="Placas"
+                           FontFamily="helvetica"
+                           FontWeight="Light"
+                           FontSize="20"
+                           Foreground="White"
+                           HorizontalAlignment="Left"
+                           Margin="125,0,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="txtBoxPlaca" 
+                             FontFamily="helvetica"
+                             FontWeight="Light"                           
+                             FontSize="20"
+                             HorizontalAlignment="Left"
+                             Foreground="White"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             Width="250"
+                             HorizontalContentAlignment="Left"
+                             Opacity="0.5"
+                             Height="25"
+                             Margin="125,0,0,0"/>
+                        <iconPacks:PackIconMaterial Kind="CodeArray"
+                                            VerticalAlignment="Center" 
+                                            HorizontalAlignment="Center"
+                                            Foreground="White"/>
+                    </StackPanel>
+                    <Border Width="250"
+                    Height="2"
+                    Background="White"
+                    Opacity="0.5"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+                    <Button Width="100" 
+                            Height="40" 
+                            Content="CANCELAR" 
+                            Margin="125,0,60,0"
+                            Style="{StaticResource loginButton}"
+                            Click="Cancelar_Click"/>
+                    <Button Width="100" 
+                            Height="40" 
+                            Content="SIGUIENTE"
+                            Style="{StaticResource loginButton}"
+                            Click="Siguiente_Click"/>
+                </StackPanel>
+
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</Window>

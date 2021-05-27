@@ -1,0 +1,104 @@
+﻿<Window x:Class="Gestor_de_Siniestros.Views.HomeView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Gestor_de_Siniestros.Views"
+        mc:Ignorable="d"
+        Title="HomeView" Height="600" Width="1000"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="Transparent">
+
+
+
+    <Border Background="#18529D"
+            CornerRadius="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Image Source="/Resources/logo.png" Width="80"
+                       RenderOptions.BitmapScalingMode="Fant"/>
+
+            <StackPanel Grid.Row="1">
+                <RadioButton x:Name="Perfil"
+                             Content="Perfil"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource EstiloBtnPrincipal}"
+                             IsChecked="True"
+                             Click="BtnPerfil"/>
+
+                <RadioButton Content="Vehiculos"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource EstiloBtnPrincipal}"
+                             Click="BtnVehiculos"/>
+
+                <RadioButton Content="Reportes"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource EstiloBtnPrincipal}"
+                             Click="BtnReportes"/>
+
+                <RadioButton Content="Chat"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource EstiloBtnPrincipal}"
+                             Click="BtnChat"/>
+
+                <RadioButton Content="Dictamenes"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource EstiloBtnPrincipal}"
+                             Click="BtnDictamenes"/>
+
+                <RadioButton Content="Panel de Control"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource EstiloBtnPrincipal}"
+                             Click="BtnPanelControl"/>
+                <Button Content="SALIR"
+                        Height="50"
+                        Foreground="Red"
+                        FontWeight="Bold"
+                        FontSize="14"
+                        Background="#0F4D93"
+                        BorderThickness="0"
+                        Margin="0,175,0,0"
+                        Click="BtnSalir"/>
+
+            </StackPanel>
+
+            <TextBlock Text="Gestor de Siniestros"
+                       FontSize="30"
+                       Foreground="White"
+                       Grid.Column="1"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontFamily="/Fuentes/#Orbitron"/>
+
+            <Viewbox x:Name="Container"
+                     Grid.Row="1"
+                     Grid.Column="1"
+                     Margin="10"/>
+
+        </Grid>
+
+    </Border>
+</Window>

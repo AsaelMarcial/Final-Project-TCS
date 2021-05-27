@@ -1,0 +1,663 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Delegaciones">
+          <Key>
+            <PropertyRef Name="idDelegacion" />
+          </Key>
+          <Property Name="idDelegacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="calle" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="numero" Type="nvarchar" MaxLength="10" />
+          <Property Name="colonia" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="codigoPostal" Type="int" Nullable="false" />
+          <Property Name="municipio" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="telefono" Type="int" Nullable="false" />
+          <Property Name="correo" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dictamenes">
+          <Key>
+            <PropertyRef Name="idDictamen" />
+          </Key>
+          <Property Name="idDictamen" Type="int" Nullable="false" />
+          <Property Name="delegacion" Type="int" Nullable="false" />
+          <Property Name="estado" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="perito" Type="int" />
+          <Property Name="fechaHora" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reportes">
+          <Key>
+            <PropertyRef Name="idReporte" />
+          </Key>
+          <Property Name="idReporte" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="direccion" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="idDictamen" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReportesFotografias">
+          <Key>
+            <PropertyRef Name="idReporteFotografia" />
+          </Key>
+          <Property Name="idReporteFotografia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idReporte" Type="int" Nullable="false" />
+          <Property Name="fotoUno" Type="varbinary(max)" Nullable="false" />
+          <Property Name="fotoDos" Type="varbinary(max)" Nullable="false" />
+          <Property Name="fotoTres" Type="varbinary(max)" Nullable="false" />
+          <Property Name="fotoCuatro" Type="varbinary(max)" />
+          <Property Name="fotoCinco" Type="varbinary(max)" />
+          <Property Name="fotoSeis" Type="varbinary(max)" />
+          <Property Name="fotoSiete" Type="varbinary(max)" />
+          <Property Name="fotoOcho" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="ReportesUsuarios">
+          <Key>
+            <PropertyRef Name="idReporteUsuario" />
+          </Key>
+          <Property Name="idReporteUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idReporte" Type="int" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReportesVehiculos">
+          <Key>
+            <PropertyRef Name="idReporteVehiculo" />
+          </Key>
+          <Property Name="idReporteVehiculo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idReporte" Type="int" Nullable="false" />
+          <Property Name="idVehiculo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="aPaterno" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="aMaterno" Type="nvarchar" MaxLength="100" />
+          <Property Name="tipoUsuario" Type="int" Nullable="false" />
+          <Property Name="fechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="idLicencia" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="celular" Type="bigint" />
+          <Property Name="usuario" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="contraseña" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="delegacion" Type="int" />
+        </EntityType>
+        <EntityType Name="Vehiculos">
+          <Key>
+            <PropertyRef Name="idVehiculo" />
+          </Key>
+          <Property Name="idVehiculo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipoPropiedad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="marca" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="modelo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="año" Type="int" Nullable="false" />
+          <Property Name="color" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombreAseguradora" Type="nvarchar" MaxLength="50" />
+          <Property Name="idPoliza" Type="nvarchar" MaxLength="50" />
+          <Property Name="placa" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="idDueño" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Dictamenes_Delegaciones">
+          <End Role="Delegaciones" Type="Self.Delegaciones" Multiplicity="1" />
+          <End Role="Dictamenes" Type="Self.Dictamenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Delegaciones">
+              <PropertyRef Name="idDelegacion" />
+            </Principal>
+            <Dependent Role="Dictamenes">
+              <PropertyRef Name="delegacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reportes_Dicatamenes">
+          <End Role="Dictamenes" Type="Self.Dictamenes" Multiplicity="1" />
+          <End Role="Reportes" Type="Self.Reportes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dictamenes">
+              <PropertyRef Name="idDictamen" />
+            </Principal>
+            <Dependent Role="Reportes">
+              <PropertyRef Name="idDictamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportesFotografias_Reportes">
+          <End Role="Reportes" Type="Self.Reportes" Multiplicity="1" />
+          <End Role="ReportesFotografias" Type="Self.ReportesFotografias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reportes">
+              <PropertyRef Name="idReporte" />
+            </Principal>
+            <Dependent Role="ReportesFotografias">
+              <PropertyRef Name="idReporte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportesUsuarios_Reportes">
+          <End Role="Reportes" Type="Self.Reportes" Multiplicity="1" />
+          <End Role="ReportesUsuarios" Type="Self.ReportesUsuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reportes">
+              <PropertyRef Name="idReporte" />
+            </Principal>
+            <Dependent Role="ReportesUsuarios">
+              <PropertyRef Name="idReporte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportesUsuarios_Usarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="ReportesUsuarios" Type="Self.ReportesUsuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="ReportesUsuarios">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportesVehiculos_Reportes">
+          <End Role="Reportes" Type="Self.Reportes" Multiplicity="1" />
+          <End Role="ReportesVehiculos" Type="Self.ReportesVehiculos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reportes">
+              <PropertyRef Name="idReporte" />
+            </Principal>
+            <Dependent Role="ReportesVehiculos">
+              <PropertyRef Name="idReporte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportesVehiculos_Vehiculos">
+          <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="1" />
+          <End Role="ReportesVehiculos" Type="Self.ReportesVehiculos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculos">
+              <PropertyRef Name="idVehiculo" />
+            </Principal>
+            <Dependent Role="ReportesVehiculos">
+              <PropertyRef Name="idVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Delegaciones">
+          <End Role="Delegaciones" Type="Self.Delegaciones" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Delegaciones">
+              <PropertyRef Name="idDelegacion" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="delegacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehiculos_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Vehiculos">
+              <PropertyRef Name="idDueño" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBModelStoreContainer">
+          <EntitySet Name="Delegaciones" EntityType="Self.Delegaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dictamenes" EntityType="Self.Dictamenes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reportes" EntityType="Self.Reportes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportesFotografias" EntityType="Self.ReportesFotografias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportesUsuarios" EntityType="Self.ReportesUsuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportesVehiculos" EntityType="Self.ReportesVehiculos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vehiculos" EntityType="Self.Vehiculos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Dictamenes_Delegaciones" Association="Self.FK_Dictamenes_Delegaciones">
+            <End Role="Delegaciones" EntitySet="Delegaciones" />
+            <End Role="Dictamenes" EntitySet="Dictamenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reportes_Dicatamenes" Association="Self.FK_Reportes_Dicatamenes">
+            <End Role="Dictamenes" EntitySet="Dictamenes" />
+            <End Role="Reportes" EntitySet="Reportes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportesFotografias_Reportes" Association="Self.FK_ReportesFotografias_Reportes">
+            <End Role="Reportes" EntitySet="Reportes" />
+            <End Role="ReportesFotografias" EntitySet="ReportesFotografias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportesUsuarios_Reportes" Association="Self.FK_ReportesUsuarios_Reportes">
+            <End Role="Reportes" EntitySet="Reportes" />
+            <End Role="ReportesUsuarios" EntitySet="ReportesUsuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportesUsuarios_Usarios" Association="Self.FK_ReportesUsuarios_Usarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="ReportesUsuarios" EntitySet="ReportesUsuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportesVehiculos_Reportes" Association="Self.FK_ReportesVehiculos_Reportes">
+            <End Role="Reportes" EntitySet="Reportes" />
+            <End Role="ReportesVehiculos" EntitySet="ReportesVehiculos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportesVehiculos_Vehiculos" Association="Self.FK_ReportesVehiculos_Vehiculos">
+            <End Role="Vehiculos" EntitySet="Vehiculos" />
+            <End Role="ReportesVehiculos" EntitySet="ReportesVehiculos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Delegaciones" Association="Self.FK_Usuarios_Delegaciones">
+            <End Role="Delegaciones" EntitySet="Delegaciones" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehiculos_Usuarios" Association="Self.FK_Vehiculos_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Vehiculos" EntitySet="Vehiculos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Delegaciones">
+          <Key>
+            <PropertyRef Name="idDelegacion" />
+          </Key>
+          <Property Name="idDelegacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="calle" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="numero" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="colonia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="codigoPostal" Type="Int32" Nullable="false" />
+          <Property Name="municipio" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telefono" Type="Int32" Nullable="false" />
+          <Property Name="correo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Dictamenes" Relationship="Self.FK_Dictamenes_Delegaciones" FromRole="Delegaciones" ToRole="Dictamenes" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Delegaciones" FromRole="Delegaciones" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Dictamenes">
+          <Key>
+            <PropertyRef Name="idDictamen" />
+          </Key>
+          <Property Name="idDictamen" Type="Int32" Nullable="false" />
+          <Property Name="delegacion" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="perito" Type="Int32" />
+          <Property Name="fechaHora" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Delegaciones" Relationship="Self.FK_Dictamenes_Delegaciones" FromRole="Dictamenes" ToRole="Delegaciones" />
+          <NavigationProperty Name="Reportes" Relationship="Self.FK_Reportes_Dicatamenes" FromRole="Dictamenes" ToRole="Reportes" />
+        </EntityType>
+        <EntityType Name="Reportes">
+          <Key>
+            <PropertyRef Name="idReporte" />
+          </Key>
+          <Property Name="idReporte" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idDictamen" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dictamenes" Relationship="Self.FK_Reportes_Dicatamenes" FromRole="Reportes" ToRole="Dictamenes" />
+          <NavigationProperty Name="ReportesFotografias" Relationship="Self.FK_ReportesFotografias_Reportes" FromRole="Reportes" ToRole="ReportesFotografias" />
+          <NavigationProperty Name="ReportesUsuarios" Relationship="Self.FK_ReportesUsuarios_Reportes" FromRole="Reportes" ToRole="ReportesUsuarios" />
+          <NavigationProperty Name="ReportesVehiculos" Relationship="Self.FK_ReportesVehiculos_Reportes" FromRole="Reportes" ToRole="ReportesVehiculos" />
+        </EntityType>
+        <EntityType Name="ReportesFotografias">
+          <Key>
+            <PropertyRef Name="idReporteFotografia" />
+          </Key>
+          <Property Name="idReporteFotografia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idReporte" Type="Int32" Nullable="false" />
+          <Property Name="fotoUno" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="fotoDos" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="fotoTres" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="fotoCuatro" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="fotoCinco" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="fotoSeis" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="fotoSiete" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="fotoOcho" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Reportes" Relationship="Self.FK_ReportesFotografias_Reportes" FromRole="ReportesFotografias" ToRole="Reportes" />
+        </EntityType>
+        <EntityType Name="ReportesUsuarios">
+          <Key>
+            <PropertyRef Name="idReporteUsuario" />
+          </Key>
+          <Property Name="idReporteUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idReporte" Type="Int32" Nullable="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Reportes" Relationship="Self.FK_ReportesUsuarios_Reportes" FromRole="ReportesUsuarios" ToRole="Reportes" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_ReportesUsuarios_Usarios" FromRole="ReportesUsuarios" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="ReportesVehiculos">
+          <Key>
+            <PropertyRef Name="idReporteVehiculo" />
+          </Key>
+          <Property Name="idReporteVehiculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idReporte" Type="Int32" Nullable="false" />
+          <Property Name="idVehiculo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Reportes" Relationship="Self.FK_ReportesVehiculos_Reportes" FromRole="ReportesVehiculos" ToRole="Reportes" />
+          <NavigationProperty Name="Vehiculos" Relationship="Self.FK_ReportesVehiculos_Vehiculos" FromRole="ReportesVehiculos" ToRole="Vehiculos" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="aPaterno" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="aMaterno" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="tipoUsuario" Type="Int32" Nullable="false" />
+          <Property Name="fechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="idLicencia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="celular" Type="Int64" />
+          <Property Name="usuario" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="contraseña" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="delegacion" Type="Int32" />
+          <NavigationProperty Name="Delegaciones" Relationship="Self.FK_Usuarios_Delegaciones" FromRole="Usuarios" ToRole="Delegaciones" />
+          <NavigationProperty Name="ReportesUsuarios" Relationship="Self.FK_ReportesUsuarios_Usarios" FromRole="Usuarios" ToRole="ReportesUsuarios" />
+          <NavigationProperty Name="Vehiculos" Relationship="DBModel.FK_Vehiculos_Usuarios" FromRole="Usuarios" ToRole="Vehiculos" />
+        </EntityType>
+        <EntityType Name="Vehiculos">
+          <Key>
+            <PropertyRef Name="idVehiculo" />
+          </Key>
+          <Property Name="idVehiculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipoPropiedad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="marca" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="año" Type="Int32" Nullable="false" />
+          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nombreAseguradora" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idPoliza" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="placa" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ReportesVehiculos" Relationship="Self.FK_ReportesVehiculos_Vehiculos" FromRole="Vehiculos" ToRole="ReportesVehiculos" />
+          <Property Name="idDueño" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="DBModel.FK_Vehiculos_Usuarios" FromRole="Vehiculos" ToRole="Usuarios" />
+        </EntityType>
+        <Association Name="FK_Dictamenes_Delegaciones">
+          <End Role="Delegaciones" Type="Self.Delegaciones" Multiplicity="1" />
+          <End Role="Dictamenes" Type="Self.Dictamenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Delegaciones">
+              <PropertyRef Name="idDelegacion" />
+            </Principal>
+            <Dependent Role="Dictamenes">
+              <PropertyRef Name="delegacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Delegaciones">
+          <End Role="Delegaciones" Type="Self.Delegaciones" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Delegaciones">
+              <PropertyRef Name="idDelegacion" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="delegacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reportes_Dicatamenes">
+          <End Role="Dictamenes" Type="Self.Dictamenes" Multiplicity="1" />
+          <End Role="Reportes" Type="Self.Reportes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dictamenes">
+              <PropertyRef Name="idDictamen" />
+            </Principal>
+            <Dependent Role="Reportes">
+              <PropertyRef Name="idDictamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportesFotografias_Reportes">
+          <End Role="Reportes" Type="Self.Reportes" Multiplicity="1" />
+          <End Role="ReportesFotografias" Type="Self.ReportesFotografias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reportes">
+              <PropertyRef Name="idReporte" />
+            </Principal>
+            <Dependent Role="ReportesFotografias">
+              <PropertyRef Name="idReporte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportesUsuarios_Reportes">
+          <End Role="Reportes" Type="Self.Reportes" Multiplicity="1" />
+          <End Role="ReportesUsuarios" Type="Self.ReportesUsuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reportes">
+              <PropertyRef Name="idReporte" />
+            </Principal>
+            <Dependent Role="ReportesUsuarios">
+              <PropertyRef Name="idReporte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportesVehiculos_Reportes">
+          <End Role="Reportes" Type="Self.Reportes" Multiplicity="1" />
+          <End Role="ReportesVehiculos" Type="Self.ReportesVehiculos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reportes">
+              <PropertyRef Name="idReporte" />
+            </Principal>
+            <Dependent Role="ReportesVehiculos">
+              <PropertyRef Name="idReporte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportesUsuarios_Usarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="ReportesUsuarios" Type="Self.ReportesUsuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="ReportesUsuarios">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportesVehiculos_Vehiculos">
+          <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="1" />
+          <End Role="ReportesVehiculos" Type="Self.ReportesVehiculos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculos">
+              <PropertyRef Name="idVehiculo" />
+            </Principal>
+            <Dependent Role="ReportesVehiculos">
+              <PropertyRef Name="idVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DataBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Delegaciones" EntityType="Self.Delegaciones" />
+          <EntitySet Name="Dictamenes" EntityType="Self.Dictamenes" />
+          <EntitySet Name="Reportes" EntityType="Self.Reportes" />
+          <EntitySet Name="ReportesFotografias" EntityType="Self.ReportesFotografias" />
+          <EntitySet Name="ReportesUsuarios" EntityType="Self.ReportesUsuarios" />
+          <EntitySet Name="ReportesVehiculos" EntityType="Self.ReportesVehiculos" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <EntitySet Name="Vehiculos" EntityType="Self.Vehiculos" />
+          <AssociationSet Name="FK_Dictamenes_Delegaciones" Association="Self.FK_Dictamenes_Delegaciones">
+            <End Role="Delegaciones" EntitySet="Delegaciones" />
+            <End Role="Dictamenes" EntitySet="Dictamenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Delegaciones" Association="Self.FK_Usuarios_Delegaciones">
+            <End Role="Delegaciones" EntitySet="Delegaciones" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reportes_Dicatamenes" Association="Self.FK_Reportes_Dicatamenes">
+            <End Role="Dictamenes" EntitySet="Dictamenes" />
+            <End Role="Reportes" EntitySet="Reportes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportesFotografias_Reportes" Association="Self.FK_ReportesFotografias_Reportes">
+            <End Role="Reportes" EntitySet="Reportes" />
+            <End Role="ReportesFotografias" EntitySet="ReportesFotografias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportesUsuarios_Reportes" Association="Self.FK_ReportesUsuarios_Reportes">
+            <End Role="Reportes" EntitySet="Reportes" />
+            <End Role="ReportesUsuarios" EntitySet="ReportesUsuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportesVehiculos_Reportes" Association="Self.FK_ReportesVehiculos_Reportes">
+            <End Role="Reportes" EntitySet="Reportes" />
+            <End Role="ReportesVehiculos" EntitySet="ReportesVehiculos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportesUsuarios_Usarios" Association="Self.FK_ReportesUsuarios_Usarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="ReportesUsuarios" EntitySet="ReportesUsuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportesVehiculos_Vehiculos" Association="Self.FK_ReportesVehiculos_Vehiculos">
+            <End Role="Vehiculos" EntitySet="Vehiculos" />
+            <End Role="ReportesVehiculos" EntitySet="ReportesVehiculos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehiculos_Usuarios" Association="DBModel.FK_Vehiculos_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Vehiculos" EntitySet="Vehiculos" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Vehiculos_Usuarios">
+          <End Type="DBModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="DBModel.Vehiculos" Role="Vehiculos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Vehiculos">
+              <PropertyRef Name="idDueño" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBModelStoreContainer" CdmEntityContainer="DataBaseEntities">
+          <EntitySetMapping Name="Delegaciones">
+            <EntityTypeMapping TypeName="DBModel.Delegaciones">
+              <MappingFragment StoreEntitySet="Delegaciones">
+                <ScalarProperty Name="idDelegacion" ColumnName="idDelegacion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="calle" ColumnName="calle" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="colonia" ColumnName="colonia" />
+                <ScalarProperty Name="codigoPostal" ColumnName="codigoPostal" />
+                <ScalarProperty Name="municipio" ColumnName="municipio" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dictamenes">
+            <EntityTypeMapping TypeName="DBModel.Dictamenes">
+              <MappingFragment StoreEntitySet="Dictamenes">
+                <ScalarProperty Name="idDictamen" ColumnName="idDictamen" />
+                <ScalarProperty Name="delegacion" ColumnName="delegacion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="perito" ColumnName="perito" />
+                <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reportes">
+            <EntityTypeMapping TypeName="DBModel.Reportes">
+              <MappingFragment StoreEntitySet="Reportes">
+                <ScalarProperty Name="idReporte" ColumnName="idReporte" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="idDictamen" ColumnName="idDictamen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportesFotografias">
+            <EntityTypeMapping TypeName="DBModel.ReportesFotografias">
+              <MappingFragment StoreEntitySet="ReportesFotografias">
+                <ScalarProperty Name="idReporteFotografia" ColumnName="idReporteFotografia" />
+                <ScalarProperty Name="idReporte" ColumnName="idReporte" />
+                <ScalarProperty Name="fotoUno" ColumnName="fotoUno" />
+                <ScalarProperty Name="fotoDos" ColumnName="fotoDos" />
+                <ScalarProperty Name="fotoTres" ColumnName="fotoTres" />
+                <ScalarProperty Name="fotoCuatro" ColumnName="fotoCuatro" />
+                <ScalarProperty Name="fotoCinco" ColumnName="fotoCinco" />
+                <ScalarProperty Name="fotoSeis" ColumnName="fotoSeis" />
+                <ScalarProperty Name="fotoSiete" ColumnName="fotoSiete" />
+                <ScalarProperty Name="fotoOcho" ColumnName="fotoOcho" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportesUsuarios">
+            <EntityTypeMapping TypeName="DBModel.ReportesUsuarios">
+              <MappingFragment StoreEntitySet="ReportesUsuarios">
+                <ScalarProperty Name="idReporteUsuario" ColumnName="idReporteUsuario" />
+                <ScalarProperty Name="idReporte" ColumnName="idReporte" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportesVehiculos">
+            <EntityTypeMapping TypeName="DBModel.ReportesVehiculos">
+              <MappingFragment StoreEntitySet="ReportesVehiculos">
+                <ScalarProperty Name="idReporteVehiculo" ColumnName="idReporteVehiculo" />
+                <ScalarProperty Name="idReporte" ColumnName="idReporte" />
+                <ScalarProperty Name="idVehiculo" ColumnName="idVehiculo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="DBModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="aPaterno" ColumnName="aPaterno" />
+                <ScalarProperty Name="aMaterno" ColumnName="aMaterno" />
+                <ScalarProperty Name="tipoUsuario" ColumnName="tipoUsuario" />
+                <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
+                <ScalarProperty Name="idLicencia" ColumnName="idLicencia" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="delegacion" ColumnName="delegacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehiculos">
+            <EntityTypeMapping TypeName="DBModel.Vehiculos">
+              <MappingFragment StoreEntitySet="Vehiculos">
+                <ScalarProperty Name="idDueño" ColumnName="idDueño" />
+                <ScalarProperty Name="idVehiculo" ColumnName="idVehiculo" />
+                <ScalarProperty Name="tipoPropiedad" ColumnName="tipoPropiedad" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="año" ColumnName="año" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="nombreAseguradora" ColumnName="nombreAseguradora" />
+                <ScalarProperty Name="idPoliza" ColumnName="idPoliza" />
+                <ScalarProperty Name="placa" ColumnName="placa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
