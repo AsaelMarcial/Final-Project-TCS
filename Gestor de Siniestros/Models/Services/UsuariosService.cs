@@ -39,24 +39,24 @@ namespace Gestor_de_Siniestros.Models.Services
             return true;
         }
 
-        public void Update(Usuarios ObjUsuarioToUpdate)
+        public bool Update(Usuarios ObjUsuarioToUpdate)
         {
-            validateUser(ObjUsuarioToUpdate);
-            if (ObjUsuarioToUpdate.idUsuario > 0)
+            bool IsUpdated = false;
+            try
             {
-                Usuarios selectedUser = DataBase.Usuarios.First(usr => usr.idUsuario == ObjUsuarioToUpdate.idUsuario);
-                selectedUser.nombre = ObjUsuarioToUpdate.nombre;
-                selectedUser.aPaterno = ObjUsuarioToUpdate.aPaterno;
-                selectedUser.email = ObjUsuarioToUpdate.email;
-                selectedUser.celular = ObjUsuarioToUpdate.celular;
-                selectedUser.contraseña = ObjUsuarioToUpdate.contraseña;
-                
+                var ObjUser = DataBase.Usuarios.Find(ObjUsuarioToUpdate.idUsuario);
+                ObjUser.celular = ObjUsuarioToUpdate.celular;
+                ObjUser.email = ObjUsuarioToUpdate.email;
+                ObjUser.delegacion = ObjUsuarioToUpdate.delegacion;
+                var NoRowsAffected = DataBase.SaveChanges();
+                IsUpdated = NoRowsAffected > 0;
             }
-            else
+            catch (Exception)
             {
-                DataBase.Usuarios.Add(ObjUsuarioToUpdate);
+
+                throw;
             }
-            DataBase.SaveChanges();
+            return IsUpdated;
         }
 
         public void Delete(Usuarios User)

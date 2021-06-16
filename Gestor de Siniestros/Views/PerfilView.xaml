@@ -67,10 +67,14 @@
                 <Label Content="Delegación"
                        Foreground="#D3DCE6"
                        FontSize="15"/>
-                <TextBox IsReadOnly="True"
+                <ComboBox IsEnabled="False"
                          Width="200"
-                         Style="{StaticResource transparentTextBox}"
-                         x:Name="txtBoxDelegacion"/>
+                         BorderThickness="0"
+                         Padding="5"
+                         Foreground="Black"
+                         Background="Transparent"
+                         VerticalAlignment="Center"
+                         x:Name="comboBoxDelegacion"/>
             </StackPanel>
         </StackPanel>
 
@@ -100,9 +104,33 @@
                     Background="#28AD56"
                     Width="100"
                     Height="50"
+                    Style="{StaticResource generalButton}" 
+                    Click="Click_Modificar"
+                    x:Name="modificar"
+                    />
+            <Button Content="Cancelar"
+                    Background="#BC3535"
+                    Width="100"
+                    Height="50"
                     Style="{StaticResource generalButton}"
+                    Margin="340,0,0,0"
+                    Visibility="Hidden"
+                    Click="Click_Cancelar"
+                    x:Name="cancelar"
+                    />
+            <Button Content="Guardar"
+                    Background="#28AD56"
+                    Width="100"
+                    Height="50"
+                    Style="{StaticResource generalButton}"
+                    Visibility="Hidden"
+                    Click="Click_Guardar"
+                    x:Name="guardar"
                     />
         </StackPanel>
-
+        <StackPanel>
+            <Label Content=""
+                   x:Name="mensajeEstado"/>
+        </StackPanel>
     </StackPanel>
 </UserControl>

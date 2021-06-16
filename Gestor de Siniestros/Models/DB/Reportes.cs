@@ -25,6 +25,8 @@ namespace Gestor_de_Siniestros.Models.DB
         public int idReporte { get; set; }
         public string direccion { get; set; }
         public int idDictamen { get; set; }
+        public System.DateTime fechaReporte { get; set; }
+        public string creador { get; set; }
     
         public virtual Dictamenes Dictamenes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

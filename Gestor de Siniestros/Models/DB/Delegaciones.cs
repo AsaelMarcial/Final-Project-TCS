@@ -28,7 +28,7 @@ namespace Gestor_de_Siniestros.Models.DB
         public string colonia { get; set; }
         public int codigoPostal { get; set; }
         public string municipio { get; set; }
-        public int telefono { get; set; }
+        public Nullable<int> telefono { get; set; }
         public string correo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

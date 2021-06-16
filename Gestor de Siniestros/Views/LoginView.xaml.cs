@@ -50,23 +50,10 @@ namespace Gestor_de_Siniestros
                             if (currentUser.contraseña == pass)
                             {                                
                                 MessageBox.Show("Contraseña Correcta, bienvenido: " + currentUser.nombre);
-                                switch (currentUser.tipoUsuario)
-                                {
-                                    case 1:
-                                        HomeView homeView = new HomeView();
-                                        homeView.LoadData(currentUser);
-                                        this.Close();
-                                        homeView.ShowDialog();
-                                        break;
-                                    case 2:
-                                        Console.WriteLine("Case 2");
-                                        break;
-                                    default:
-                                        
-                                        break;
-                                }
-                                
-
+                                HomeView homeView = new HomeView();
+                                homeView.LoadData(currentUser);
+                                this.Close();
+                                homeView.ShowDialog();
                             }
                             else
                             {
@@ -95,6 +82,11 @@ namespace Gestor_de_Siniestros
         {
             RegistroView registro = new RegistroView();
             registro.ShowDialog();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

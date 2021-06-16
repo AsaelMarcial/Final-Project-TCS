@@ -65,14 +65,25 @@
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource EstiloBtnPrincipal}"
-                             Click="BtnDictamenes"/>
-
-                <RadioButton Content="Panel de Control"
+                             Click="BtnDictamenes"
+                             x:Name="dicatamenes"/>
+                
+                <RadioButton Content="Delegaciones"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource EstiloBtnPrincipal}"
-                             Click="BtnPanelControl"/>
+                             Click="BtnDelegaciones"
+                             x:Name="delegaciones"/>
+
+                <RadioButton Content="Panel de Control"
+                             Height="50"
+                             Visibility="Hidden"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource EstiloBtnPrincipal}"
+                             Click="BtnPanelControl"
+                             x:Name="panelControl"/>
                 <Button Content="SALIR"
                         Height="50"
                         Foreground="Red"
@@ -80,7 +91,7 @@
                         FontSize="14"
                         Background="#0F4D93"
                         BorderThickness="0"
-                        Margin="0,175,0,0"
+                        Margin="0,100,0,0"
                         Click="BtnSalir"/>
 
             </StackPanel>

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Gestor_de_Siniestros.Views.VehiculosView"
+﻿<UserControl x:Class="Gestor_de_Siniestros.Views.DelegacionesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,17 +6,15 @@
              xmlns:local="clr-namespace:Gestor_de_Siniestros.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="300"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <StackPanel>
-            <Label Content="Mis Vehiculos"
+            <Label Content="Delegaciones"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    FontSize="30"
@@ -24,34 +22,22 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1">
-            <DataGrid x:Name="dgVehiculos"
+            <DataGrid x:Name="dgDelegaciones"
                       Height="300" 
-                      IsReadOnly="True"/>
+                      DataContext=""/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10,10,10,10">
-            <TextBox x:Name="txtBoxBusqueda"
+            <TextBox x:Name="txtBoxName"
                      IsReadOnly="True"
                      Width="200"
-                     Visibility="Hidden"
                      Style="{StaticResource transparentTextBox}"/>
             <Button Content="Buscar"
                     Background="#8B8A87"
                     Width="100"
                     Height="50"
-                    Visibility="Hidden"
                     Style="{StaticResource generalButton}"
-                    Margin="10,0,15,0" Click="Button_Click"/>
-            <Button Content="Actualizar"
-                    Background="#3581BC"
-                    Width="100"
-                    Height="50"
-                    Style="{StaticResource generalButton}"
-                    Margin="0,0,250,0"
-                    Visibility="Hidden"
-                    x:Name="actualizar" 
-                    Click="actualizar_Click"
-                    />
+                    Margin="10,0,350,0"/>
             <Button Content="Agregar"
                     Background="#28AD56"
                     Width="100"
@@ -61,5 +47,4 @@
         </StackPanel>
 
     </Grid>
-    
 </UserControl>
