@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Gestor_de_Siniestros.Models.DB;
+using Gestor_de_Siniestros.Models.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,16 +23,27 @@ namespace Gestor_de_Siniestros.Views
     public partial class DelegacionesView : UserControl
     {
         RegistroDelegacionView registroDelegacionView;
+        DataBaseEntities DataBase;
+        DelegacionesService delegacionesService;
 
         public DelegacionesView()
         {
+            DataBase = new DataBaseEntities();
+            delegacionesService = new DelegacionesService();
+            
             InitializeComponent();
+            LoadData();
         }
 
         private void Agregar_Click(object sender, RoutedEventArgs e)
         {
             registroDelegacionView = new RegistroDelegacionView();
             registroDelegacionView.ShowDialog();
+        }
+
+        public void LoadData()
+        {
+            dgDelegaciones.ItemsSource = delegacionesService.GetAll();
         }
     }
 }

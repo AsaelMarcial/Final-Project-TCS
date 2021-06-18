@@ -23,7 +23,9 @@
 
         <StackPanel Grid.Row="1">
             <DataGrid x:Name="dgReportes"
-                      Height="300"/>
+                      Height="300"
+                      Width="700"
+                      IsReadOnly="True"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10,10,10,10">
@@ -33,12 +35,11 @@
                      Visibility="Hidden"
                      Style="{StaticResource transparentTextBox}"/>
             <Button Content="Ver"
-                    Background="#8B8A87"
+                    Background="#3581BC"
                     Width="100"
                     Height="50"
-                    IsEnabled="False"
                     Style="{StaticResource generalButton}"
-                    Margin="10,0,15,0"/>
+                    Margin="10,0,15,0" Click="Button_Click"/>
             <Button Content="Actualizar"
                     Background="#3581BC"
                     Width="100"

@@ -1,5 +1,7 @@
 ﻿using Gestor_de_Siniestros.Models.DB;
 using System.Windows;
+using System.Windows.Input;
+
 namespace Gestor_de_Siniestros.Views
 {
     public partial class HomeView : Window
@@ -10,10 +12,17 @@ namespace Gestor_de_Siniestros.Views
         VehiculosView vehiculosView = new VehiculosView();
         ReporteView reporteView = new ReporteView();
         DelegacionesView delegacionView = new DelegacionesView();
+        ChatView chatView = new ChatView();
 
         public HomeView()
         {
             InitializeComponent();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
         }
 
         public void LoadData(Usuarios currentUser)
@@ -30,6 +39,7 @@ namespace Gestor_de_Siniestros.Views
             perfilView.LoadData(currentUser);
             vehiculosView.LoadData(currentUser);
             reporteView.LoadData(currentUser);
+            chatView.LoadData(currentUser);
             Container.Child = perfilView;
         }
 
@@ -50,7 +60,7 @@ namespace Gestor_de_Siniestros.Views
 
         private void BtnChat(object sender, RoutedEventArgs e)
         {
-            
+            Container.Child = chatView;
         }
 
         private void BtnDictamenes(object sender, RoutedEventArgs e)

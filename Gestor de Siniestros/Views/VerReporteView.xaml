@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Gestor_de_Siniestros.Views" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="VerReporteView" Height="700" Width="700"
+        Title="VerReporteView" Height="1000" Width="700"
         AllowsTransparency="True" Background="Transparent"
         WindowStyle="None" ResizeMode="NoResize"
         MouseDown="Window_MouseDown">
@@ -84,14 +84,10 @@
                         <Label Content="Estado (Dictamen)"
                        Foreground="#D3DCE6"
                        FontSize="15"/>
-                        <ComboBox IsEnabled="False"
+                        <TextBox IsReadOnly="True"
                          Width="200"
-                         BorderThickness="0"
-                         Padding="5"
-                         Foreground="Black"
-                         Background="Transparent"
-                         VerticalAlignment="Center"
-                         x:Name="comboBoxEstado"/>
+                         Style="{StaticResource transparentTextBox}"
+                         x:Name="txtBoxEstado"/>
                     </StackPanel>
                 </StackPanel>
 
@@ -122,6 +118,7 @@
                            FontSize="15"/>
                     <DataGrid Height="100"
                               Width="600"
+                              IsReadOnly="True"
                               x:Name="dgInvolucrados"/>
                 </StackPanel>
                 <StackPanel Margin="0,0,0,0">
@@ -129,9 +126,35 @@
                            HorizontalAlignment="Center"
                            Foreground="#D3DCE6"
                            FontSize="15"/>
-                    <DataGrid Height="100"
+                    <DataGrid Height="200"
                               Width="600"
-                              x:Name="dgFotografias"/>
+                              IsReadOnly="True"
+                              AutoGenerateColumns="False"
+                              x:Name="dgFotografias">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Width="300">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Foto1}"></Image>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="300">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Foto2}"></Image>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="300">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Foto3}"></Image>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="20,10,0,0">
@@ -140,7 +163,7 @@
                     Width="100"
                     Height="50"
                     Style="{StaticResource generalButton}" 
-                    x:Name="Salir"/>
+                    x:Name="Salir" Click="Salir_Click"/>
                 </StackPanel>
             </StackPanel>
         </Grid>

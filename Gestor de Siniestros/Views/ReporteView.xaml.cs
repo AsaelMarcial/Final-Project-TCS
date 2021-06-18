@@ -1,6 +1,9 @@
 ﻿using Gestor_de_Siniestros.Models.DB;
+using Gestor_de_Siniestros.Models.Services;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +27,7 @@ namespace Gestor_de_Siniestros.Views
         RegistroReporteView registroView;
         Usuarios _currentUser;
         DataBaseEntities DataBase;
+        VerReporteView verReporte;
 
         public ReporteView()
         {
@@ -42,26 +46,43 @@ namespace Gestor_de_Siniestros.Views
 
         internal void LoadData(Usuarios currentUser)
         {
-            List<Reportes> reportes = new List<Reportes>();
+            var reportes = new List<ReporteCompletoService>();
+
             _currentUser = currentUser;
             if (currentUser.tipoUsuario != 3)
             {
                 btnNuevoReporte.Visibility = Visibility.Visible;
             }
-
+            
             try
             {
                 var reportesUsuario = DataBase.ReportesUsuarios.Where(u => u.idUsuario == currentUser.idUsuario).ToList();
+
                 foreach (var report in reportesUsuario)
                 {
-                    reportes.Add(DataBase.Reportes.Where(r => r.idReporte == report.idReporte).FirstOrDefault());
+                    ReporteCompletoService currentReporte = new ReporteCompletoService();
+                    currentReporte.IdReporte = DataBase.Reportes.Where(r => r.idReporte == report.idReporte).Select(x => x.idReporte).FirstOrDefault();
+                    currentReporte.Direccion = DataBase.Reportes.Where(r => r.idReporte == report.idReporte).Select(x => x.direccion).FirstOrDefault();
+                    currentReporte.FechaReporte = DataBase.Reportes.Where(r => r.idReporte == report.idReporte).Select(x => x.fechaReporte).FirstOrDefault();
+                    reportes.Add(currentReporte);
                 }
                 dgReportes.ItemsSource = reportes;
+               
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ReporteCompletoService idSelecteReporte = (ReporteCompletoService)dgReportes.SelectedItem;
+            verReporte = new VerReporteView();
+            verReporte.LoadData(idSelecteReporte.IdReporte);
+            verReporte.ShowDialog();
+            
+        }
+
     }
 }

@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Gestor_de_Siniestros.Views" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="registroDelegacion" Height="850" Width="500"
+        Title="registroDelegacion" Height="870" Width="500"
         AllowsTransparency="True" Background="Transparent"
-        WindowStyle="None" ResizeMode="NoResize">
+        WindowStyle="None" ResizeMode="NoResize" MouseDown="Window_MouseDown">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
