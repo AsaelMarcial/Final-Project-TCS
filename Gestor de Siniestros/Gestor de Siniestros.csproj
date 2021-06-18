@@ -161,6 +161,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Services\DelegacionesService.cs" />
+    <Compile Include="Models\Services\ImagenService.cs" />
     <Compile Include="Models\Services\ReportesService.cs" />
     <Compile Include="Models\Services\VehiculosService.cs" />
     <Compile Include="Views\DelegacionesView.xaml.cs">
@@ -189,6 +190,9 @@
     </Compile>
     <Compile Include="Views\VehiculosView.xaml.cs">
       <DependentUpon>VehiculosView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VerReporteView.xaml.cs">
+      <DependentUpon>VerReporteView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\DelegacionesView.xaml">
       <SubType>Designer</SubType>
@@ -291,6 +295,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\VehiculosView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VerReporteView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

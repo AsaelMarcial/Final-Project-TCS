@@ -5,16 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Gestor_de_Siniestros.Views
 {
@@ -28,8 +20,10 @@ namespace Gestor_de_Siniestros.Views
         List<byte[]> ObjImagesList;
         List<Vehiculos> ObjVehiculosList;
         List<Usuarios> ObjUsuariosList;
+        List<ImagenService> images;
         Usuarios _currentUser;
         ReportesService reportesService;
+
 
         public RegistroReporteView()
         {
@@ -38,6 +32,7 @@ namespace Gestor_de_Siniestros.Views
             delegacionesService = new DelegacionesService();
             reportesService = new ReportesService();
             ObjImagesList = new List<byte[]>();
+            images = new List<ImagenService>();
             ObjVehiculosList = new List<Vehiculos>();
             _currentUser = new Usuarios();
             ObjUsuariosList = new List<Usuarios>();
@@ -79,23 +74,30 @@ namespace Gestor_de_Siniestros.Views
             }
             int idDelegacion = DataBase.Delegaciones.Where(u => u.nombre == comboBoxDelegacion.SelectedValue.ToString()).Select(u => u.idDelegacion).FirstOrDefault();
 
-            reportesService.Add(currentReporte, ObjUsuariosList, ObjVehiculosList, ObjImagesList, idDelegacion);
+            if(ObjImagesList.Count < 3)
+            {
+                MessageBox.Show("Seleccionar minimo 3 imagenes!");
+            }
+            else
+            {
+                reportesService.Add(currentReporte, ObjUsuariosList, ObjVehiculosList, ObjImagesList, idDelegacion);
+                MessageBox.Show("Reporte registrado correctamente!");
+                this.Close();
 
-            MessageBox.Show("Reporte registrado correctamente!");
-            this.Close();
+            }
         }
 
         private void AgregarFoto_Click(object sender, RoutedEventArgs e)
         {
+            ImagenService currentImage;
             OpenFileDialog fileChooser = new OpenFileDialog();
             fileChooser.InitialDirectory = "c:\\";
             fileChooser.Multiselect = false;
             fileChooser.Filter = "Todas las imagenes|*jpg;*png;*bmp|JPG|*jpg|PNG|*png|BMP|*bmp";
             fileChooser.FilterIndex = 1;
             fileChooser.RestoreDirectory = true;
-            if(fileChooser.ShowDialog() == DialogResult.HasValue)
+            if(fileChooser.ShowDialog() == true)
             {
-                dgImages.ItemsSource = fileChooser.FileName;
                 byte[] imageFile = null;
                 Stream myStream = fileChooser.OpenFile();
                 using (MemoryStream ms = new MemoryStream())
@@ -104,17 +106,48 @@ namespace Gestor_de_Siniestros.Views
                     imageFile = ms.ToArray();
                 }
                 ObjImagesList.Add(imageFile);
+                String fileUbication = fileChooser.FileName;
+                currentImage = new ImagenService(fileUbication);
+                images.Add(currentImage);
+                updateData();
             }
-
+            else
+            {
+                Console.WriteLine("Error al agregar imagen.");
+            }
         }
 
         private void AgregarVehiculo_Click(object sender, RoutedEventArgs e)
         {
-            var vehiculo = new Vehiculos();
-            vehiculo = DataBase.Vehiculos.Where(v => v.placa == txtBoxPlaca.Text).FirstOrDefault();
-            ObjVehiculosList.Add(vehiculo);
+            try
+            {
+                var vehiculo = new Vehiculos();
+                vehiculo = DataBase.Vehiculos.Where(v => v.placa == txtBoxPlaca.Text).FirstOrDefault();
+                if(vehiculo == null)
+                {
+                    MessageBox.Show("Verificar numero de placa.");
+                }
+                else
+                {
+                    ObjVehiculosList.Add(vehiculo);
+                    txtBoxPlaca.Text = "";
+                }
+
+            }
+            catch (Exception ex )
+            {
+                throw ex;
+            }
+            
+            updateData();
+        }
+
+        private void updateData()
+        {
+            dgVehiculos.ItemsSource = null;
+            dgImages.ItemsSource = null;
             dgVehiculos.ItemsSource = ObjVehiculosList;
-            txtBoxPlaca.Text = "";
+            dgImages.ItemsSource = images;
         }
 
     }

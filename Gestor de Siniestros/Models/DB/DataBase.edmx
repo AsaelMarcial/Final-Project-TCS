@@ -23,7 +23,7 @@
           <Key>
             <PropertyRef Name="idDictamen" />
           </Key>
-          <Property Name="idDictamen" Type="int" Nullable="false" />
+          <Property Name="idDictamen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="delegacion" Type="int" Nullable="false" />
           <Property Name="estado" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="descripcion" Type="nvarchar" MaxLength="250" Nullable="false" />

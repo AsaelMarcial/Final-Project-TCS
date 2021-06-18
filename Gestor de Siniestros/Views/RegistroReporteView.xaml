@@ -145,8 +145,8 @@
                            HorizontalAlignment="Left"
                            Margin="125,0,0,0"/>
                     <StackPanel Orientation="Horizontal">
-                        <DataGrid 
-                           x:Name="dgImages"
+                        <DataGrid
+                            x:Name="dgImages"
                            Height="200"
                            Width="250"
                            Margin="125,0,0,0">

@@ -42,10 +42,25 @@ namespace Gestor_de_Siniestros.Views
 
         internal void LoadData(Usuarios currentUser)
         {
+            List<Reportes> reportes = new List<Reportes>();
             _currentUser = currentUser;
             if (currentUser.tipoUsuario != 3)
             {
                 btnNuevoReporte.Visibility = Visibility.Visible;
+            }
+
+            try
+            {
+                var reportesUsuario = DataBase.ReportesUsuarios.Where(u => u.idUsuario == currentUser.idUsuario).ToList();
+                foreach (var report in reportesUsuario)
+                {
+                    reportes.Add(DataBase.Reportes.Where(r => r.idReporte == report.idReporte).FirstOrDefault());
+                }
+                dgReportes.ItemsSource = reportes;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }

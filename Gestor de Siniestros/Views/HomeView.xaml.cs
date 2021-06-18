@@ -1,6 +1,5 @@
 ﻿using Gestor_de_Siniestros.Models.DB;
 using System.Windows;
-
 namespace Gestor_de_Siniestros.Views
 {
     public partial class HomeView : Window

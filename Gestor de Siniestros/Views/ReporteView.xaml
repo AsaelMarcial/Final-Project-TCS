@@ -32,11 +32,11 @@
                      Width="200"
                      Visibility="Hidden"
                      Style="{StaticResource transparentTextBox}"/>
-            <Button Content="Buscar"
+            <Button Content="Ver"
                     Background="#8B8A87"
                     Width="100"
                     Height="50"
-                    Visibility="Hidden"
+                    IsEnabled="False"
                     Style="{StaticResource generalButton}"
                     Margin="10,0,15,0"/>
             <Button Content="Actualizar"

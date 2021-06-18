@@ -32,14 +32,15 @@ namespace Gestor_de_Siniestros.Models.Services
             catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
             return ObjReportesList;
         }
 
         public bool Add(Reportes ObjNewReport, List<Usuarios> ObjUsedUsers, List<Vehiculos> ObjUsedVehicles, List<byte[]> ObjUsedImages, int idDelegacion)
         {
-            int leftImages = ObjUsedImages.Count;
+            bool IsAdded = false;
+            int totalImages = ObjUsedImages.Count;
             DateTime today = DateTime.Today;
 
             try
@@ -50,6 +51,7 @@ namespace Gestor_de_Siniestros.Models.Services
                 ObjDictamen.descripcion = "Pendiente de dictaminar!";
                 ObjDictamen.fechaHora = today;
                 DataBase.Dictamenes.Add(ObjDictamen);
+                DataBase.SaveChanges();
 
                 var ObjReporte = new Reportes();
                 ObjReporte.direccion = ObjNewReport.direccion;
@@ -57,50 +59,35 @@ namespace Gestor_de_Siniestros.Models.Services
                 ObjReporte.fechaReporte = today;
                 ObjReporte.creador = ObjNewReport.creador;
                 DataBase.Reportes.Add(ObjReporte);
+                DataBase.SaveChanges();
 
-                /*var ObjFotografias = new ReportesFotografias();
+                var ObjFotografias = new ReportesFotografias();
                 ObjFotografias.idReporte = ObjReporte.idReporte;
-                ObjFotografias.fotoUno = ObjUsedImages.Last();
-                ObjUsedImages.RemoveAt(leftImages);
-                leftImages -= leftImages;
-                ObjFotografias.fotoDos = ObjUsedImages.Last();
-                ObjUsedImages.RemoveAt(leftImages);
-                leftImages -= leftImages;
-                ObjFotografias.fotoTres = ObjUsedImages.Last();
-                ObjUsedImages.RemoveAt(leftImages);
-                leftImages -= leftImages;
-                if (leftImages > 0)
+                ObjFotografias.fotoUno = ObjUsedImages[0];
+                ObjFotografias.fotoDos = ObjUsedImages[1];
+                ObjFotografias.fotoTres = ObjUsedImages[2];
+                if (totalImages == 4)
                 {
-                    ObjFotografias.fotoCuatro = ObjUsedImages.Last();
-                    ObjUsedImages.RemoveAt(leftImages);
-                    leftImages -= leftImages;
+                    ObjFotografias.fotoCuatro = ObjUsedImages[3];
                 }
-                if (leftImages > 0)
+                if (totalImages == 5)
                 {
-                    ObjFotografias.fotoCinco = ObjUsedImages.Last();
-                    ObjUsedImages.RemoveAt(leftImages);
-                    leftImages -= leftImages;
+                    ObjFotografias.fotoCinco = ObjUsedImages[4];
                 }
-                if (leftImages > 0)
+                if (totalImages ==  6)
                 {
-                    ObjFotografias.fotoSeis = ObjUsedImages.Last();
-                    ObjUsedImages.RemoveAt(leftImages);
-                    leftImages -= leftImages;
+                    ObjFotografias.fotoSeis = ObjUsedImages[5];
                 }
-                if (leftImages > 0)
+                if (totalImages == 7)
                 {
-                    ObjFotografias.fotoSiete = ObjUsedImages.Last();
-                    ObjUsedImages.RemoveAt(leftImages);
-                    leftImages -= leftImages;
+                    ObjFotografias.fotoSiete = ObjUsedImages[6];
                 }
 
-                if (leftImages > 0)
+                if (totalImages == 8)
                 {
-                    ObjFotografias.fotoOcho = ObjUsedImages.Last();
-                    ObjUsedImages.RemoveAt(leftImages);
-                    leftImages -= leftImages;
+                    ObjFotografias.fotoOcho = ObjUsedImages[7];
                 }
-                DataBase.ReportesFotografias.Add(ObjFotografias);*/
+                DataBase.ReportesFotografias.Add(ObjFotografias);
 
                 foreach (var usuario in ObjUsedUsers)
                 {
@@ -117,7 +104,16 @@ namespace Gestor_de_Siniestros.Models.Services
                     DataBase.ReportesVehiculos.Add(ObjVehiculo);
                 }
 
-                DataBase.SaveChanges();
+                var NoOfRowsAffected = DataBase.SaveChanges();
+                if(NoOfRowsAffected > 0)
+                {
+                    IsAdded = true;
+                }
+                else
+                {
+                    IsAdded = false;
+                    DataBase.Dictamenes.Remove(ObjDictamen);
+                }
             }
             catch (Exception ex )
             {
@@ -125,7 +121,7 @@ namespace Gestor_de_Siniestros.Models.Services
                 throw;
             }
 
-            return true;
+            return IsAdded;
         }
     }
 }
