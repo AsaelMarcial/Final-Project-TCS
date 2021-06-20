@@ -52,14 +52,13 @@ namespace Gestor_de_Siniestros.Views
             _currentUser.idUsuario = currentUser.idUsuario;
             try
             {
-                var vehiculos = DataBase.Vehiculos.Where(v => v.idDueño == currentUser.idUsuario).Select(v => new { v.idVehiculo, v.placa, v.modelo, v.tipoPropiedad }).ToList();
+                var vehiculos = DataBase.Vehiculos.Where(v => v.idDueño == currentUser.idUsuario).Select(v => new { v.idVehiculo, v.placa, v.marca, v.modelo, v.tipoPropiedad, v.nombreAseguradora, v.idPoliza }).ToList();
                 dgVehiculos.ItemsSource = vehiculos;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error: " + ex);
             }
-
         }
 
         private void actualizar_Click(object sender, RoutedEventArgs e)

@@ -13,6 +13,8 @@ namespace Gestor_de_Siniestros.Views
         ReporteView reporteView = new ReporteView();
         DelegacionesView delegacionView = new DelegacionesView();
         ChatView chatView = new ChatView();
+        DicatamenesView dicatamenesView = new DicatamenesView();
+        PanelControlView panelControlView = new PanelControlView();
 
         public HomeView()
         {
@@ -27,19 +29,25 @@ namespace Gestor_de_Siniestros.Views
 
         public void LoadData(Usuarios currentUser)
         {
-            if(currentUser.tipoUsuario == 3)
-            {
-                delegaciones.Visibility = Visibility.Hidden;
-                dicatamenes.Visibility = Visibility.Hidden;
-            }
-            if(currentUser.tipoUsuario == 2)
+            if (currentUser.tipoUsuario == 1)
             {
                 panelControl.Visibility = Visibility.Visible;
+            }
+
+            if (currentUser.tipoUsuario == 2)
+            {
+                dicatamenes.Visibility = Visibility.Visible;
+            }
+
+            if (currentUser.tipoUsuario == 4 || currentUser.tipoUsuario == 5)
+            {
+                delegaciones.Visibility = Visibility.Visible;
             }
             perfilView.LoadData(currentUser);
             vehiculosView.LoadData(currentUser);
             reporteView.LoadData(currentUser);
             chatView.LoadData(currentUser);
+            dicatamenesView.LoadData(currentUser);
             Container.Child = perfilView;
         }
 
@@ -65,9 +73,8 @@ namespace Gestor_de_Siniestros.Views
 
         private void BtnDictamenes(object sender, RoutedEventArgs e)
         {
-            
+            Container.Child = dicatamenesView;
         }
-
 
         private void BtnDelegaciones(object sender, RoutedEventArgs e)
         {
@@ -76,7 +83,7 @@ namespace Gestor_de_Siniestros.Views
 
         private void BtnPanelControl(object sender, RoutedEventArgs e)
         {
-
+            Container.Child = panelControlView;
         }
 
         private void BtnSalir(object sender, RoutedEventArgs e)

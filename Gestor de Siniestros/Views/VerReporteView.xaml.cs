@@ -24,6 +24,8 @@ namespace Gestor_de_Siniestros.Views
     {
         DataBaseEntities DataBase;
         ReportesService reportesService;
+        int id;
+        int idPerito;
 
         public VerReporteView()
         {
@@ -39,12 +41,20 @@ namespace Gestor_de_Siniestros.Views
                 DragMove();
         }
 
-        internal void LoadData(int idReporte)
+        internal void LoadData(int idReporte, Usuarios currentUser)
         {
+            int tipoUsuario = currentUser.tipoUsuario;
+
+            if(tipoUsuario == 2)
+                Dictaminar.Visibility = Visibility.Visible;
+
             var ObjReporte = DataBase.Reportes.Where(r => r.idReporte == idReporte).FirstOrDefault();
             var ObjDicatamen = DataBase.Dictamenes.Where(d => d.idDictamen == ObjReporte.idDictamen).FirstOrDefault();
             var ObjDelegacion = DataBase.Delegaciones.Where(d => d.idDelegacion == ObjDicatamen.delegacion).FirstOrDefault();
             var listaUsuarios = new List<Usuarios>();
+
+            id = ObjDicatamen.idDictamen;
+            idPerito = currentUser.idUsuario;
 
             txtBoxCreador.Text = ObjReporte.creador;
             txtBoxDireccion.Text = ObjReporte.direccion;
@@ -52,7 +62,10 @@ namespace Gestor_de_Siniestros.Views
             txtBoxDelegacion.Text = ObjDelegacion.nombre;
             txtBoxEstado.Text = ObjDicatamen.estado;
             txtBoxDescripcion.Text = ObjDicatamen.descripcion;
-            dateFechaDictamen.Text = ObjDicatamen.fechaHora.ToString();           
+            dateFechaDictamen.Text = ObjDicatamen.fechaHora.ToString();
+            txtBoxPerito.Text = ObjDicatamen.perito.ToString();
+            txtBoxDescripcion.Text = ObjDicatamen.descripcion;
+            txtBoxFolio.Text = ObjDicatamen.idDictamen.ToString();
 
             var ObjInvolucrados = DataBase.ReportesUsuarios.Where(i => i.idReporte == idReporte).ToList();
 
@@ -84,6 +97,14 @@ namespace Gestor_de_Siniestros.Views
 
         private void Salir_Click(object sender, RoutedEventArgs e)
         {
+            this.Close();
+        }
+
+        private void Dictaminar_Click(object sender, RoutedEventArgs e)
+        {
+            DictaminarView dictaminarView = new DictaminarView();
+            dictaminarView.LoadData(id, idPerito);
+            dictaminarView.ShowDialog();
             this.Close();
         }
     }

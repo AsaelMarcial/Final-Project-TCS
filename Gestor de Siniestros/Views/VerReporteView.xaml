@@ -111,6 +111,26 @@
                          x:Name="dateFechaDictamen"/>
                     </StackPanel>
                 </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                    <StackPanel Margin="20,0,0,0">
+                        <Label Content="Perito encargado"
+                       Foreground="#D3DCE6"
+                       FontSize="15"/>
+                        <TextBox IsReadOnly="True"
+                         Width="420"
+                         Style="{StaticResource transparentTextBox}"
+                         x:Name="txtBoxPerito"/>
+                    </StackPanel>
+                    <StackPanel Margin="20,0,0,0">
+                        <Label Content="Folio Dictamen"
+                       Foreground="#D3DCE6"
+                       FontSize="15"/>
+                        <TextBox IsReadOnly="True"
+                         Width="200"
+                         Style="{StaticResource transparentTextBox}"
+                         x:Name="txtBoxFolio"/>
+                    </StackPanel>
+                </StackPanel>
                 <StackPanel Margin="0,0,0,0">
                     <Label Content="Involucrados"
                            HorizontalAlignment="Center"
@@ -126,7 +146,7 @@
                            HorizontalAlignment="Center"
                            Foreground="#D3DCE6"
                            FontSize="15"/>
-                    <DataGrid Height="200"
+                    <DataGrid Height="300"
                               Width="600"
                               IsReadOnly="True"
                               AutoGenerateColumns="False"
@@ -153,6 +173,41 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="300">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Foto4}"></Image>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="300">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Foto5}"></Image>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="300">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Foto6}"></Image>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="300">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Foto7}"></Image>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="300">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Foto8}"></Image>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
@@ -162,8 +217,17 @@
                     Background="#28AD56"
                     Width="100"
                     Height="50"
+                    Margin="20,0,50,0"
                     Style="{StaticResource generalButton}" 
                     x:Name="Salir" Click="Salir_Click"/>
+                    <Button Content="Dictaminar"
+                    Background="#3581BC"
+                    Visibility="Collapsed"
+                    Width="100"
+                    Height="50"
+                    Style="{StaticResource generalButton}" 
+                    x:Name="Dictaminar" 
+                    Click="Dictaminar_Click"/>
                 </StackPanel>
             </StackPanel>
         </Grid>

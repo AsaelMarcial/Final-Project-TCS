@@ -23,12 +23,14 @@ namespace Gestor_de_Siniestros.Views
     {
         Usuarios currentUser;
         UsuariosService userService;
+        DataBaseEntities DataBase;
 
         public RegistroView()
         {
             InitializeComponent();
             currentUser = new Usuarios();
             userService = new UsuariosService();
+            DataBase = new DataBaseEntities();
         }
 
         private void Cancelar_Click(object sender, RoutedEventArgs e)
@@ -41,39 +43,49 @@ namespace Gestor_de_Siniestros.Views
             String nombre = txtBoxName.Text;
             String aPaterno = txtBoxFLastName.Text;
             String aMaterno = txtBoxSLastName.Text;
-            //DateTime fechaNacimiento;
+            DateTime fechaNacimiento = dateBirth.SelectedDate.Value;
             String celular;
             String email = txtBoxEmail.Text;
-            String usuario = txtBoxUsername.Text;
-            String contraseña = pswBoxPassword.Password;
-
-
-            if (System.Text.RegularExpressions.Regex.IsMatch(txtBoxPhone.Text, "[^0-9]"))
-            {
-                MessageBox.Show("El campo Celular solo acepta numeros.");
-                txtBoxPhone.Text = txtBoxPhone.Text.Remove(txtBoxPhone.Text.Length - 1);
-            }else
-            {
-                celular = txtBoxPhone.Text;
-                currentUser.celular = Convert.ToInt64(celular);
+            if(DataBase.Usuarios.Where(u => u.usuario == txtBoxUsername.Text).Any() == true){
+                MessageBox.Show("El nombre de usuario ya existe.");
             }
+            else
+            {
+                String usuario = txtBoxUsername.Text;
+                String contraseña = pswBoxPassword.Password;
 
-            if (nombre.Length > 0 && aPaterno.Length > 0 && email.Length > 0 && usuario.Length > 0 && contraseña.Length > 0)
-            {
-                currentUser.nombre = nombre;
-                currentUser.aPaterno = aPaterno;
-                currentUser.aMaterno = aMaterno;
-                currentUser.email = email;
-                currentUser.usuario = usuario;
-                currentUser.contraseña = contraseña;
-                currentUser.tipoUsuario = 3;
-                userService.Add(currentUser);
-                MessageBox.Show("Usuario registrado correctamente.");
-                this.Close();
-            } else
-            {
-                MessageBox.Show("Verificar campos vacios.");
+
+                if (System.Text.RegularExpressions.Regex.IsMatch(txtBoxPhone.Text, "[^0-9]"))
+                {
+                    MessageBox.Show("El campo Celular solo acepta numeros.");
+                    txtBoxPhone.Text = txtBoxPhone.Text.Remove(txtBoxPhone.Text.Length - 1);
+                }
+                else
+                {
+                    celular = txtBoxPhone.Text;
+                    currentUser.celular = Convert.ToInt64(celular);
+                }
+
+                if (nombre.Length > 0 && aPaterno.Length > 0 && email.Length > 0 && usuario.Length > 0 && contraseña.Length > 0)
+                {
+                    currentUser.nombre = nombre;
+                    currentUser.aPaterno = aPaterno;
+                    currentUser.aMaterno = aMaterno;
+                    currentUser.fechaNacimiento = fechaNacimiento;
+                    currentUser.email = email;
+                    currentUser.usuario = usuario;
+                    currentUser.contraseña = contraseña;
+                    currentUser.tipoUsuario = 3;
+                    userService.Add(currentUser);
+                    MessageBox.Show("Usuario registrado correctamente.");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Verificar campos vacios.");
+                }
             }
+           
    
         }
 

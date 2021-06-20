@@ -64,6 +64,7 @@
                              Height="50"
                              Foreground="White"
                              FontSize="14"
+                             Visibility="Collapsed"
                              Style="{StaticResource EstiloBtnPrincipal}"
                              Click="BtnDictamenes"
                              x:Name="dicatamenes"/>
@@ -74,11 +75,12 @@
                              FontSize="14"
                              Style="{StaticResource EstiloBtnPrincipal}"
                              Click="BtnDelegaciones"
+                             Visibility="Collapsed"
                              x:Name="delegaciones"/>
 
                 <RadioButton Content="Panel de Control"
                              Height="50"
-                             Visibility="Hidden"
+                             Visibility="Collapsed"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource EstiloBtnPrincipal}"

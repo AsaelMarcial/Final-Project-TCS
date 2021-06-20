@@ -2,31 +2,38 @@
 using Gestor_de_Siniestros.Models.Services;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace Gestor_de_Siniestros.Views
 {
     /// <summary>
-    /// Lógica de interacción para ReporteView.xaml
+    /// Lógica de interacción para DicatamenesView.xaml
     /// </summary>
-    public partial class ReporteView : UserControl
+    public partial class DicatamenesView : UserControl
     {
+
         RegistroReporteView registroView;
         Usuarios _currentUser;
         DataBaseEntities DataBase;
         VerReporteView verReporte;
 
-        public ReporteView()
+        public DicatamenesView()
         {
             InitializeComponent();
             _currentUser = new Usuarios();
             DataBase = new DataBaseEntities();
-            
         }
-
         private void Agregar_Click(object sender, RoutedEventArgs e)
         {
             registroView = new RegistroReporteView();
@@ -39,11 +46,6 @@ namespace Gestor_de_Siniestros.Views
             var reportes = new List<ReporteCompletoService>();
 
             _currentUser = currentUser;
-            if (currentUser.tipoUsuario == 6)
-            {
-                btnNuevoReporte.Visibility = Visibility.Visible;
-            }
-            
             try
             {
                 var reportesUsuario = DataBase.ReportesUsuarios.Where(u => u.idUsuario == currentUser.idUsuario).ToList();
@@ -57,7 +59,7 @@ namespace Gestor_de_Siniestros.Views
                     reportes.Add(currentReporte);
                 }
                 dgReportes.ItemsSource = reportes;
-               
+
             }
             catch (Exception ex)
             {
@@ -71,7 +73,7 @@ namespace Gestor_de_Siniestros.Views
             verReporte = new VerReporteView();
             verReporte.LoadData(idSelecteReporte.IdReporte, _currentUser);
             verReporte.ShowDialog();
-            
+
         }
 
     }

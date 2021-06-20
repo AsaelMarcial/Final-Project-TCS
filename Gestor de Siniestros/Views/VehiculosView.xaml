@@ -30,24 +30,12 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10,10,10,10">
-            <TextBox x:Name="txtBoxBusqueda"
-                     IsReadOnly="True"
-                     Width="200"
-                     Visibility="Hidden"
-                     Style="{StaticResource transparentTextBox}"/>
-            <Button Content="Buscar"
-                    Background="#8B8A87"
-                    Width="100"
-                    Height="50"
-                    Visibility="Hidden"
-                    Style="{StaticResource generalButton}"
-                    Margin="10,0,15,0" Click="Button_Click"/>
             <Button Content="Actualizar"
                     Background="#3581BC"
                     Width="100"
                     Height="50"
                     Style="{StaticResource generalButton}"
-                    Margin="0,0,250,0"
+                    Margin="520,0,50,0"
                     Visibility="Hidden"
                     x:Name="actualizar" 
                     Click="actualizar_Click"

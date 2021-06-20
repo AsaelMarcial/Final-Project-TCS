@@ -172,8 +172,17 @@
     <Compile Include="Views\DelegacionesView.xaml.cs">
       <DependentUpon>DelegacionesView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DicatamenesView.xaml.cs">
+      <DependentUpon>DicatamenesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DictaminarView.xaml.cs">
+      <DependentUpon>DictaminarView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PanelControlView.xaml.cs">
+      <DependentUpon>PanelControlView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PerfilView.xaml.cs">
       <DependentUpon>PerfilView.xaml</DependentUpon>
@@ -204,6 +213,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DelegacionesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DicatamenesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DictaminarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -279,6 +296,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\PanelControlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PerfilView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -346,9 +367,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ChatCliente\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\logo.png" />
   </ItemGroup>
@@ -363,6 +382,7 @@
       <DependentUpon>DataBase.edmx</DependentUpon>
       <LastGenOutput>DataBase.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\mazo.png" />
     <Resource Include="Resources\logo-delegacion.png" />
     <Resource Include="Resources\icono-reporte.png" />
     <Resource Include="Resources\automovil.png" />
