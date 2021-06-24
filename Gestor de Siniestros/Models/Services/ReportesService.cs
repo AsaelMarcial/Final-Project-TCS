@@ -37,7 +37,7 @@ namespace Gestor_de_Siniestros.Models.Services
             return ObjReportesList;
         }
 
-        public bool Add(Reportes ObjNewReport, List<Usuarios> ObjUsedUsers, List<Vehiculos> ObjUsedVehicles, List<byte[]> ObjUsedImages, int idDelegacion)
+        public bool Add(Reportes ObjNewReport, List<Usuarios> ObjUsedUsers, List<VehiculoModel> ObjUsedVehicles, List<byte[]> ObjUsedImages, int idDelegacion)
         {
             bool IsAdded = false;
             int totalImages = ObjUsedImages.Count;
@@ -99,7 +99,7 @@ namespace Gestor_de_Siniestros.Models.Services
                 foreach (var vehiculo in ObjUsedVehicles)
                 {
                     var ObjVehiculo = new ReportesVehiculos();
-                    ObjVehiculo.idVehiculo = vehiculo.idVehiculo;
+                    ObjVehiculo.idVehiculo = vehiculo.id;
                     ObjVehiculo.idReporte = ObjReporte.idReporte;
                     DataBase.ReportesVehiculos.Add(ObjVehiculo);
                 }

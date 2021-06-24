@@ -1,25 +1,15 @@
-﻿using Gestor_de_Siniestros.Models.DB;
+﻿using Gestor_de_Siniestros.Models;
+using Gestor_de_Siniestros.Models.DB;
 using Gestor_de_Siniestros.Models.Services;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Gestor_de_Siniestros.Views
 {
-    /// <summary>
-    /// Lógica de interacción para VerReporteView.xaml
-    /// </summary>
+
     public partial class VerReporteView : Window
     {
         DataBaseEntities DataBase;
@@ -29,10 +19,9 @@ namespace Gestor_de_Siniestros.Views
 
         public VerReporteView()
         {
+            InitializeComponent();
             DataBase = new DataBaseEntities();
             reportesService = new ReportesService();
-
-            InitializeComponent();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -44,28 +33,45 @@ namespace Gestor_de_Siniestros.Views
         internal void LoadData(int idReporte, Usuarios currentUser)
         {
             int tipoUsuario = currentUser.tipoUsuario;
+            var peritoActual = new Usuarios();
+            string nombre;
 
-            if(tipoUsuario == 2)
+            if (tipoUsuario == 2)
+            {
                 Dictaminar.Visibility = Visibility.Visible;
+            }
 
             var ObjReporte = DataBase.Reportes.Where(r => r.idReporte == idReporte).FirstOrDefault();
             var ObjDicatamen = DataBase.Dictamenes.Where(d => d.idDictamen == ObjReporte.idDictamen).FirstOrDefault();
             var ObjDelegacion = DataBase.Delegaciones.Where(d => d.idDelegacion == ObjDicatamen.delegacion).FirstOrDefault();
             var listaUsuarios = new List<Usuarios>();
+            var listaVehiculos = new List<Vehiculos>();
 
             id = ObjDicatamen.idDictamen;
             idPerito = currentUser.idUsuario;
+            peritoActual = DataBase.Usuarios.Where(x => x.idUsuario == idPerito).FirstOrDefault();
+            nombre = peritoActual.nombre + " " + peritoActual.aPaterno + " " + peritoActual.aMaterno;
 
             txtBoxCreador.Text = ObjReporte.creador;
             txtBoxDireccion.Text = ObjReporte.direccion;
-            dateFechaReporte.Text = ObjReporte.fechaReporte.ToString();
+            dateReporte.Text = ObjReporte.fechaReporte.ToString();
             txtBoxDelegacion.Text = ObjDelegacion.nombre;
             txtBoxEstado.Text = ObjDicatamen.estado;
             txtBoxDescripcion.Text = ObjDicatamen.descripcion;
             dateFechaDictamen.Text = ObjDicatamen.fechaHora.ToString();
-            txtBoxPerito.Text = ObjDicatamen.perito.ToString();
+            
             txtBoxDescripcion.Text = ObjDicatamen.descripcion;
-            txtBoxFolio.Text = ObjDicatamen.idDictamen.ToString();
+            if (ObjDicatamen.estado == "Pendiente")
+            {
+                txtBoxFolio.Text = " ";
+                txtBoxPerito.Text = " ";
+            }
+            else
+            {
+                txtBoxFolio.Text = ObjDicatamen.idDictamen.ToString();
+                txtBoxPerito.Text = nombre;
+            }
+
 
             var ObjInvolucrados = DataBase.ReportesUsuarios.Where(i => i.idReporte == idReporte).ToList();
 
@@ -74,7 +80,15 @@ namespace Gestor_de_Siniestros.Views
                 listaUsuarios.Add(DataBase.Usuarios.Where(u => u.idUsuario == involucrado.idUsuario).FirstOrDefault());
             }
 
-            dgInvolucrados.ItemsSource = listaUsuarios;
+            dgConductores.ItemsSource = listaUsuarios;
+
+            var ObjVehiculos = DataBase.ReportesVehiculos.Where(v => v.idReporte == idReporte).ToList();
+            foreach (var coche in ObjVehiculos)
+            {
+                listaVehiculos.Add(DataBase.Vehiculos.Where(u => u.idVehiculo == coche.idVehiculo).FirstOrDefault());
+            }
+
+            dgVehiculos.ItemsSource = listaVehiculos;
 
             List<FotografiaModel> listaFotos = new List<FotografiaModel>();
             using (DataBaseEntities db = new DataBaseEntities())

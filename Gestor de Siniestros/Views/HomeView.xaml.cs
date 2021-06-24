@@ -15,6 +15,7 @@ namespace Gestor_de_Siniestros.Views
         ChatView chatView = new ChatView();
         DicatamenesView dicatamenesView = new DicatamenesView();
         PanelControlView panelControlView = new PanelControlView();
+        UsuariosView usuariosView = new UsuariosView();
 
         public HomeView()
         {
@@ -43,10 +44,14 @@ namespace Gestor_de_Siniestros.Views
             {
                 delegaciones.Visibility = Visibility.Visible;
             }
+            if(currentUser.tipoUsuario == 6)
+            {
+                conductores.Visibility = Visibility.Visible;
+            }
             perfilView.LoadData(currentUser);
             vehiculosView.LoadData(currentUser);
             reporteView.LoadData(currentUser);
-            chatView.LoadData(currentUser);
+            //chatView.LoadData(currentUser);
             dicatamenesView.LoadData(currentUser);
             Container.Child = perfilView;
         }
@@ -54,6 +59,11 @@ namespace Gestor_de_Siniestros.Views
         private void BtnPerfil(object sender, RoutedEventArgs e)
         {
             Container.Child = perfilView;
+        }
+
+        private void BtnConductores(object sender, RoutedEventArgs e)
+        {
+            Container.Child = usuariosView;
         }
 
         private void BtnVehiculos(object sender, RoutedEventArgs e)
@@ -68,7 +78,7 @@ namespace Gestor_de_Siniestros.Views
 
         private void BtnChat(object sender, RoutedEventArgs e)
         {
-            Container.Child = chatView;
+          //  Container.Child = chatView;
         }
 
         private void BtnDictamenes(object sender, RoutedEventArgs e)

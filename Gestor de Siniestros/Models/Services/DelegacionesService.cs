@@ -15,8 +15,7 @@ namespace Gestor_de_Siniestros.Models.Services
         public DelegacionesService()
         {
             DataBase = new DataBaseEntities();
-            ObjDelegacionesList = new List<Delegaciones>();
-            
+            ObjDelegacionesList = new List<Delegaciones>();            
         }
 
         public List<Delegaciones> GetAll()
@@ -61,7 +60,7 @@ namespace Gestor_de_Siniestros.Models.Services
 
                 DataBase.Delegaciones.Add(ObjDelegacion);
                 var NORowsAffected = DataBase.SaveChanges();
-                IsAdded = NORowsAffected > 0;
+                IsAdded = NORowsAffected > 0;               
             }
             catch (Exception ex)
             {
@@ -69,6 +68,32 @@ namespace Gestor_de_Siniestros.Models.Services
                 throw;
             }
             return IsAdded;
+        }
+
+
+        public bool Update(Delegaciones currentDelegacion)
+        {
+            Console.WriteLine("ID DELEGACION: " + currentDelegacion.idDelegacion);
+            bool IsUpdated = false;
+            try
+            {
+                var ObjDelegacion = DataBase.Delegaciones.Where(x => x.idDelegacion == currentDelegacion.idDelegacion).FirstOrDefault();
+                ObjDelegacion.nombre = currentDelegacion.nombre;
+                ObjDelegacion.calle = currentDelegacion.calle;
+                ObjDelegacion.numero = currentDelegacion.numero;
+                ObjDelegacion.colonia = currentDelegacion.colonia;
+                ObjDelegacion.codigoPostal = currentDelegacion.codigoPostal;
+                ObjDelegacion.municipio = currentDelegacion.municipio;
+                ObjDelegacion.telefono = currentDelegacion.telefono;
+                ObjDelegacion.correo = currentDelegacion.correo;
+                var NoRowsAffected = DataBase.SaveChanges();
+                IsUpdated = NoRowsAffected > 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return IsUpdated;
         }
     }
 }

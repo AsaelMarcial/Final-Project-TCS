@@ -160,11 +160,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Services\InvolucradoModel.cs" />
+    <Compile Include="Models\Services\ConductorModel.cs" />
     <Compile Include="Models\Services\DelegacionesService.cs" />
     <Compile Include="Models\Services\FotografiaModel.cs" />
     <Compile Include="Models\Services\ImagenService.cs" />
-    <Compile Include="Models\Services\ReporteCompletoService.cs" />
+    <Compile Include="Models\Services\ObserverRespuesta.cs" />
+    <Compile Include="Models\Services\ReporteModel.cs" />
     <Compile Include="Models\Services\ReportesService.cs" />
+    <Compile Include="Models\Services\VehiculoModel.cs" />
     <Compile Include="Models\Services\VehiculosService.cs" />
     <Compile Include="Views\ChatView.xaml.cs">
       <DependentUpon>ChatView.xaml</DependentUpon>
@@ -180,6 +184,12 @@
     </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModificarDelegacionView.xaml.cs">
+      <DependentUpon>ModificarDelegacionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModificarUsuarioView.xaml.cs">
+      <DependentUpon>ModificarUsuarioView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PanelControlView.xaml.cs">
       <DependentUpon>PanelControlView.xaml</DependentUpon>
@@ -202,11 +212,17 @@
     <Compile Include="Views\ReporteView.xaml.cs">
       <DependentUpon>ReporteView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UsuariosView.xaml.cs">
+      <DependentUpon>UsuariosView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\VehiculosView.xaml.cs">
       <DependentUpon>VehiculosView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VerReporteView.xaml.cs">
       <DependentUpon>VerReporteView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VerUsuarioView.xaml.cs">
+      <DependentUpon>VerUsuarioView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\ChatView.xaml">
       <SubType>Designer</SubType>
@@ -296,6 +312,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ModificarDelegacionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModificarUsuarioView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PanelControlView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -324,11 +348,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UsuariosView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\VehiculosView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\VerReporteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VerUsuarioView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -382,6 +414,8 @@
       <DependentUpon>DataBase.edmx</DependentUpon>
       <LastGenOutput>DataBase.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\perfil3.png" />
+    <Resource Include="Resources\create_account.png" />
     <Resource Include="Resources\mazo.png" />
     <Resource Include="Resources\logo-delegacion.png" />
     <Resource Include="Resources\icono-reporte.png" />

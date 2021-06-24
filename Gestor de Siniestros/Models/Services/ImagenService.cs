@@ -8,13 +8,20 @@ namespace Gestor_de_Siniestros.Models.Services
 {
     class ImagenService
     {
-        private String Imagen;
+        public String Nombre { get; set; }
+        public String Ubicacion { get; set; }
+        public byte[] Foto { get; set; }
 
-        public string Ubicacion { get => Imagen; set => Imagen = value; }
-
-        public ImagenService(String imagen)
+        public ImagenService()
         {
-            this.Imagen = imagen;
+
+        }
+
+        public ImagenService(string nombre, string ubicacion, byte[] foto)
+        {
+            Nombre = nombre;
+            Ubicacion = ubicacion;
+            Foto = foto;
         }
     }
 }

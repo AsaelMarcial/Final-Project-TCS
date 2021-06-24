@@ -1,25 +1,11 @@
 ﻿using Gestor_de_Siniestros.Models.DB;
 using Gestor_de_Siniestros.Models.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Gestor_de_Siniestros.Views
 {
-    /// <summary>
-    /// Lógica de interacción para DelegacionesView.xaml
-    /// </summary>
+
     public partial class DelegacionesView : UserControl
     {
         RegistroDelegacionView registroDelegacionView;
@@ -44,6 +30,23 @@ namespace Gestor_de_Siniestros.Views
         public void LoadData()
         {
             dgDelegaciones.ItemsSource = delegacionesService.GetAll();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Delegaciones idSelected = (Delegaciones)dgDelegaciones.SelectedItem;
+            ModificarDelegacionView modificarDelegacionView = new ModificarDelegacionView();
+            if (idSelected == null)
+            {
+                MessageBox.Show("Selecciona elemento de la lista.");
+
+            }
+            else
+            {
+                modificarDelegacionView.LoadData(idSelected);
+                modificarDelegacionView.ShowDialog();
+            }
+            
         }
     }
 }

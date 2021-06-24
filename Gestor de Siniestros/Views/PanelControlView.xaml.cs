@@ -22,12 +22,14 @@ namespace Gestor_de_Siniestros.Views
     {
         UsuariosService userService;
         DataBaseEntities DataBase;
+        List<ConductorModel> ObjUsuarios;
 
         public PanelControlView()
         {
             InitializeComponent();
             userService = new UsuariosService();
             DataBase = new DataBaseEntities();
+            ObjUsuarios = new List<ConductorModel>();
             LoadData();
         }
 
@@ -35,8 +37,20 @@ namespace Gestor_de_Siniestros.Views
         {
             try
             {
-                var usuarios = DataBase.Usuarios.Select(v => new { v.idUsuario, v.nombre, v.aPaterno, v.aMaterno, v.celular, v.idLicencia, v.tipoUsuario }).ToList();
-                dgUsuarios.ItemsSource = usuarios;
+                var usuarios = userService.GetAll();
+                foreach (var usuario in usuarios)
+                {
+                    DateTime fecha = usuario.fechaNacimiento;
+                    ConductorModel conductor = new ConductorModel();
+                    conductor.id = usuario.idUsuario;
+                    conductor.Nombre = usuario.nombre;
+                    conductor.Apellido = usuario.aPaterno + " " + usuario.aMaterno;
+                    conductor.Fecha = fecha.ToString("MMMM dd, yyyy");
+                    conductor.Licencia = usuario.idLicencia;
+                    conductor.Celular = usuario.celular.ToString();
+                    ObjUsuarios.Add(conductor);
+                }
+                dgUsuarios.ItemsSource = ObjUsuarios;
             }
             catch (Exception ex)
             {
@@ -48,6 +62,38 @@ namespace Gestor_de_Siniestros.Views
         {
             RegistroView registro = new RegistroView();
             registro.ShowDialog();
+        }
+
+        private void actualizar_Click(object sender, RoutedEventArgs e)
+        {
+            ConductorModel idSelected = (ConductorModel)dgUsuarios.SelectedItem;
+            ModificarUsuarioView modificarView = new ModificarUsuarioView();
+            if (idSelected == null)
+            {
+                MessageBox.Show("Selecciona elemento de la lista.");
+            }
+            else
+            {
+                modificarView.LoadData(idSelected.id);
+                modificarView.ShowDialog();
+            }
+        }
+
+
+        private void visualizar_Click(object sender, RoutedEventArgs e)
+        {
+            ConductorModel idSelectedUser = (ConductorModel)dgUsuarios.SelectedItem;
+            VerUsuarioView usuarioView = new VerUsuarioView();
+            if (idSelectedUser == null)
+            {
+                MessageBox.Show("Selecciona elemento de la lista.");
+
+            }
+            else
+            {
+                usuarioView.LoadData(idSelectedUser);
+                usuarioView.ShowDialog();
+            }
         }
     }
 }

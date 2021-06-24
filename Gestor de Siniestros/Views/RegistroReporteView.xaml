@@ -111,11 +111,21 @@
                            HorizontalAlignment="Left"
                            Margin="125,0,0,0"/>
                     <StackPanel Orientation="Horizontal">
-                        <DataGrid 
-                           x:Name="dgVehiculos"
-                           Height="200"
-                           Width="250"
-                           Margin="125,0,0,0">
+                        <DataGrid x:Name="dgVehiculos"
+                                   Height="200"
+                                  Width="350"
+                                   IsReadOnly="True"
+                                   AutoGenerateColumns="False"
+                                  Margin="75,0,0,0"
+                                  >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Placa" Binding="{Binding Placa}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Marca" Binding="{Binding Marca}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Modelo" Binding="{Binding Modelo}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Año" Binding="{Binding Año}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Color" Binding="{Binding Color}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Aseguradora" Binding="{Binding Aseguradora}"></DataGridTextColumn>
+                            </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
                 </StackPanel>
@@ -125,10 +135,12 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBox Width="100"
                                  x:Name="txtBoxPlaca"
-                                 Margin="125,0,20,0"/>
+                                 Margin="75,0,20,0"/>
                         <Button Content="Agregar"
                                 Margin="0,0,20,0" 
                                 Click="AgregarVehiculo_Click"/>
+                        <Button Content="Eliminar"
+                                x:Name="btnEliminarVehiculo" Click="btnEliminarVehiculo_Click"/>
                     </StackPanel>
                     <StackPanel>
                         <Label Content="*Placa del vehiculo"
@@ -148,20 +160,34 @@
                         <DataGrid
                             x:Name="dgImages"
                            Height="200"
-                           Width="250"
-                           Margin="125,0,0,0">
+                           Width="350"
+                           Margin="75,0,0,0"
+                            IsReadOnly="True"
+                            SelectionMode="Single"
+                            AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}"></DataGridTextColumn>
+                                <DataGridTemplateColumn Width="300">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image Source="{Binding Foto}"></Image>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
                     
                 </StackPanel>
-                <StackPanel Margin="0,-07,0,0">
+                <StackPanel Margin="0,0,0,0">
                     <Label Content="*Minimo 3, maximo 8."
                            Margin="125,0,0,0"/>
                     <StackPanel Orientation="Horizontal">
                         <Button Content="Agregar"
                                 Margin="125,0,20,0"
                                 Click="AgregarFoto_Click"/>
-                        <Button Content="Eliminar"/>
+                        <Button Content="Eliminar"
+                                x:Name="btnEliminarImagen" Click="btnEliminarImagen_Click"/>
                     </StackPanel>
                 </StackPanel>
 

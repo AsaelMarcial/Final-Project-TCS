@@ -95,19 +95,10 @@
                             Click="Entrar_Click"/>
                     <Button Width="100" 
                             Height="40" 
-                            Content="REGISTRO"
-                            Style="{StaticResource loginButton}"
-                            Click="Registro_Click"/>
-                </StackPanel>
-
-                <StackPanel>
-                    <Button Width="100" 
-                            Height="40" 
-                            Content="Salir"
-                            Margin="0,40,0,0"
+                            Content="SALIR"
+                            Margin="0,0,0,0"
                             Style="{StaticResource loginButton}" Click="Button_Click"/>
                 </StackPanel>
-
             </StackPanel>
 
         </Grid>

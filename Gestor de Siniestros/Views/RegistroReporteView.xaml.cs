@@ -10,20 +10,17 @@ using System.Windows.Input;
 
 namespace Gestor_de_Siniestros.Views
 {
-    /// <summary>
-    /// Lógica de interacción para RegistroReporteView.xaml
-    /// </summary>
     public partial class RegistroReporteView : Window
     {
         private DataBaseEntities DataBase;
         DelegacionesService delegacionesService;
         List<byte[]> ObjImagesList;
-        List<Vehiculos> ObjVehiculosList;
+        List<VehiculoModel> ObjVehiculosList;
         List<Usuarios> ObjUsuariosList;
         List<ImagenService> images;
         Usuarios _currentUser;
         ReportesService reportesService;
-
+        ObserverRespuesta notificacion;
 
         public RegistroReporteView()
         {
@@ -33,10 +30,15 @@ namespace Gestor_de_Siniestros.Views
             reportesService = new ReportesService();
             ObjImagesList = new List<byte[]>();
             images = new List<ImagenService>();
-            ObjVehiculosList = new List<Vehiculos>();
+            ObjVehiculosList = new List<VehiculoModel>();
             _currentUser = new Usuarios();
             ObjUsuariosList = new List<Usuarios>();
             LoadCombo();
+        }
+
+        public RegistroReporteView(ObserverRespuesta notificacion) : this()
+        {
+            this.notificacion = notificacion;
         }
 
         internal void LoadData(Usuarios currentUser)
@@ -69,7 +71,7 @@ namespace Gestor_de_Siniestros.Views
             foreach (var conductor in ObjVehiculosList)
             {
                 var oUser = new Usuarios();
-                oUser = DataBase.Usuarios.Where(u => u.idUsuario == conductor.idDueño).FirstOrDefault();
+                oUser = DataBase.Usuarios.Where(u => u.idUsuario == conductor.id).FirstOrDefault();
                 ObjUsuariosList.Add(oUser);
             }
             int idDelegacion = DataBase.Delegaciones.Where(u => u.nombre == comboBoxDelegacion.SelectedValue.ToString()).Select(u => u.idDelegacion).FirstOrDefault();
@@ -82,8 +84,8 @@ namespace Gestor_de_Siniestros.Views
             {
                 reportesService.Add(currentReporte, ObjUsuariosList, ObjVehiculosList, ObjImagesList, idDelegacion);
                 MessageBox.Show("Reporte registrado correctamente!");
+                notificacion.actualizaInformacion("Clic en siguiente");
                 this.Close();
-
             }
         }
 
@@ -107,7 +109,8 @@ namespace Gestor_de_Siniestros.Views
                 }
                 ObjImagesList.Add(imageFile);
                 String fileUbication = fileChooser.FileName;
-                currentImage = new ImagenService(fileUbication);
+                String fileName = fileChooser.SafeFileName;
+                currentImage = new ImagenService(fileName, fileUbication, imageFile);
                 images.Add(currentImage);
                 updateData();
             }
@@ -129,7 +132,15 @@ namespace Gestor_de_Siniestros.Views
                 }
                 else
                 {
-                    ObjVehiculosList.Add(vehiculo);
+                    VehiculoModel current = new VehiculoModel();
+                    current.id = vehiculo.idVehiculo;
+                    current.Placa = vehiculo.placa;
+                    current.Marca = vehiculo.marca;
+                    current.Modelo = vehiculo.modelo;
+                    current.Año = vehiculo.año;
+                    current.Color = vehiculo.color;
+                    current.Aseguradora = vehiculo.nombreAseguradora;
+                    ObjVehiculosList.Add(current);
                     txtBoxPlaca.Text = "";
                 }
 
@@ -150,5 +161,18 @@ namespace Gestor_de_Siniestros.Views
             dgImages.ItemsSource = images;
         }
 
+        private void btnEliminarVehiculo_Click(object sender, RoutedEventArgs e)
+        {
+            int currentVehiculo = dgVehiculos.SelectedIndex;
+            ObjVehiculosList.RemoveAt(currentVehiculo);
+            updateData();
+        }
+
+        private void btnEliminarImagen_Click(object sender, RoutedEventArgs e)
+        {
+            int currentImage = dgImages.SelectedIndex;
+            images.RemoveAt(currentImage);
+            updateData();
+        }
     }
 }

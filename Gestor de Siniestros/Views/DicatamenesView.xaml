@@ -25,7 +25,16 @@
             <DataGrid x:Name="dgReportes"
                       Height="300"
                       Width="700"
-                      IsReadOnly="True"/>
+                      IsReadOnly="True"
+                      SelectionMode="Single"
+                      AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Dirección" Binding="{Binding Direccion}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Creador" Binding="{Binding Creador}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Estado" Binding="{Binding Estado}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10,10,10,10">

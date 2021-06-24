@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
         
         <StackPanel>
-            <Label Content="Mis Vehiculos"
+            <Label Content="Vehiculos"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    FontSize="30"
@@ -26,7 +26,17 @@
         <StackPanel Grid.Row="1">
             <DataGrid x:Name="dgVehiculos"
                       Height="300" 
-                      IsReadOnly="True"/>
+                      IsReadOnly="True"
+                      AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Placa" Binding="{Binding Placa}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Marca" Binding="{Binding Marca}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Modelo" Binding="{Binding Modelo}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Año" Binding="{Binding Año}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Color" Binding="{Binding Color}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Aseguradora" Binding="{Binding Aseguradora}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10,10,10,10">

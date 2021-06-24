@@ -9,35 +9,34 @@ using System.Windows.Controls;
 
 namespace Gestor_de_Siniestros.Views
 {
-    /// <summary>
-    /// Lógica de interacción para ReporteView.xaml
-    /// </summary>
-    public partial class ReporteView : UserControl
+    public partial class ReporteView : UserControl, ObserverRespuesta
     {
         RegistroReporteView registroView;
         Usuarios _currentUser;
         DataBaseEntities DataBase;
         VerReporteView verReporte;
+        ReportesService reporteService;
+        List<ReporteModel> reportes;
 
         public ReporteView()
         {
             InitializeComponent();
             _currentUser = new Usuarios();
             DataBase = new DataBaseEntities();
-            
+            reporteService = new ReportesService();
+            reportes = new List<ReporteModel>();
+
         }
 
         private void Agregar_Click(object sender, RoutedEventArgs e)
         {
-            registroView = new RegistroReporteView();
+            registroView = new RegistroReporteView(this);
             registroView.LoadData(_currentUser);
             registroView.ShowDialog();
         }
 
         internal void LoadData(Usuarios currentUser)
-        {
-            var reportes = new List<ReporteCompletoService>();
-
+        {          
             _currentUser = currentUser;
             if (currentUser.tipoUsuario == 6)
             {
@@ -46,14 +45,17 @@ namespace Gestor_de_Siniestros.Views
             
             try
             {
-                var reportesUsuario = DataBase.ReportesUsuarios.Where(u => u.idUsuario == currentUser.idUsuario).ToList();
+                var ListaReportes = reporteService.GetAll();
 
-                foreach (var report in reportesUsuario)
+                foreach (var report in ListaReportes)
                 {
-                    ReporteCompletoService currentReporte = new ReporteCompletoService();
-                    currentReporte.IdReporte = DataBase.Reportes.Where(r => r.idReporte == report.idReporte).Select(x => x.idReporte).FirstOrDefault();
-                    currentReporte.Direccion = DataBase.Reportes.Where(r => r.idReporte == report.idReporte).Select(x => x.direccion).FirstOrDefault();
-                    currentReporte.FechaReporte = DataBase.Reportes.Where(r => r.idReporte == report.idReporte).Select(x => x.fechaReporte).FirstOrDefault();
+                    ReporteModel currentReporte = new ReporteModel();
+                    DateTime fecha = report.fechaReporte;
+                    currentReporte.id = report.idReporte;
+                    currentReporte.Fecha = fecha.ToString("MMMM dd, yyyy");
+                    currentReporte.Direccion = report.direccion;
+                    currentReporte.Creador = report.creador;
+                    currentReporte.Estado = DataBase.Dictamenes.Where(e => e.idDictamen == report.idDictamen).Select(x => x.estado).FirstOrDefault();
                     reportes.Add(currentReporte);
                 }
                 dgReportes.ItemsSource = reportes;
@@ -65,14 +67,50 @@ namespace Gestor_de_Siniestros.Views
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
-            ReporteCompletoService idSelecteReporte = (ReporteCompletoService)dgReportes.SelectedItem;
-            verReporte = new VerReporteView();
-            verReporte.LoadData(idSelecteReporte.IdReporte, _currentUser);
-            verReporte.ShowDialog();
-            
+            String texto = textBusqueda.Text;
+            var listaFiltrada = new List<ReporteModel>();
+            if (textBusqueda.Text.Length == 0)
+            {
+                dgReportes.ItemsSource = null;
+                dgReportes.ItemsSource = reportes;
+            }
+            else
+            {
+                foreach (var reporte in reportes)
+                {
+                    if (reporte.Direccion.ToLower().Contains(textBusqueda.Text.ToLower()))
+                    {
+                        listaFiltrada.Add(reporte);
+                    }
+                }
+                dgReportes.ItemsSource = null;
+                dgReportes.ItemsSource = listaFiltrada;
+            }
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ReporteModel idSelecteReporte = (ReporteModel)dgReportes.SelectedItem;
+            if(idSelecteReporte == null)
+            {
+                MessageBox.Show("Selecciona elemento de la lista.");
+            }
+            else
+            {
+                verReporte = new VerReporteView();
+                verReporte.LoadData(idSelecteReporte.id, _currentUser);
+                verReporte.ShowDialog();
+
+            }
+
+        }
+
+        public void actualizaInformacion(string operacion)
+        {
+            dgReportes.ItemsSource = null;
+            LoadData(_currentUser);
+        }
     }
 }

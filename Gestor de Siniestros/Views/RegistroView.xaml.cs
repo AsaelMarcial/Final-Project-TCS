@@ -1,29 +1,24 @@
 ﻿using Gestor_de_Siniestros.Models.DB;
 using Gestor_de_Siniestros.Models.Services;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Gestor_de_Siniestros.Views
 {
-    /// <summary>
-    /// Lógica de interacción para RegistroView.xaml
-    /// </summary>
     public partial class RegistroView : Window
     {
         Usuarios currentUser;
         UsuariosService userService;
         DataBaseEntities DataBase;
+        ObserverRespuesta notificacion;
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
+        }
 
         public RegistroView()
         {
@@ -31,6 +26,11 @@ namespace Gestor_de_Siniestros.Views
             currentUser = new Usuarios();
             userService = new UsuariosService();
             DataBase = new DataBaseEntities();
+        }
+
+        public RegistroView(ObserverRespuesta notificacion) : this()
+        {
+            this.notificacion = notificacion;
         }
 
         private void Cancelar_Click(object sender, RoutedEventArgs e)
@@ -46,6 +46,7 @@ namespace Gestor_de_Siniestros.Views
             DateTime fechaNacimiento = dateBirth.SelectedDate.Value;
             String celular;
             String email = txtBoxEmail.Text;
+            String licencia = txtBoxPlaca.Text;
             if(DataBase.Usuarios.Where(u => u.usuario == txtBoxUsername.Text).Any() == true){
                 MessageBox.Show("El nombre de usuario ya existe.");
             }
@@ -75,9 +76,11 @@ namespace Gestor_de_Siniestros.Views
                     currentUser.email = email;
                     currentUser.usuario = usuario;
                     currentUser.contraseña = contraseña;
+                    currentUser.idLicencia = licencia;
                     currentUser.tipoUsuario = 3;
                     userService.Add(currentUser);
                     MessageBox.Show("Usuario registrado correctamente.");
+                    notificacion.actualizaInformacion("Click en Siguiente");
                     this.Close();
                 }
                 else
@@ -88,6 +91,5 @@ namespace Gestor_de_Siniestros.Views
            
    
         }
-
     }
 }

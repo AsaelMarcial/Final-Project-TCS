@@ -34,12 +34,14 @@
                     Height="50"
                     Style="{StaticResource generalButton}"
                     Margin="160,0,20,0"
-                    x:Name="Modificar" 
+                    x:Name="visualizar" 
+                    Click="visualizar_Click"
                     />
             <Button Content="Eliminar"
                     Background="IndianRed"
                     Width="100"
                     Height="50"
+                    IsEnabled="False"
                     x:Name="Eliminar"
                     Style="{StaticResource generalButton}"/>
             <Button Content="Actualizar"
@@ -49,6 +51,7 @@
                     Style="{StaticResource generalButton}"
                     Margin="20,0,20,0"
                     x:Name="actualizar" 
+                    Click="actualizar_Click" 
                     />
             <Button Content="Agregar"
                     Background="#28AD56"

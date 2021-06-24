@@ -41,9 +41,9 @@ namespace Gestor_de_Siniestros.Views
             this.Close();
         }
 
-        internal void LoadUser(Usuarios currentUser)
+        internal void LoadUser(int currentUser)
         {
-            _idDueño = currentUser.idUsuario;
+            _idDueño = currentUser;
         }
 
         private void Siguiente_Click(object sender, RoutedEventArgs e)

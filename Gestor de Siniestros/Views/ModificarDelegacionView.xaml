@@ -1,11 +1,11 @@
-﻿<Window x:Class="Gestor_de_Siniestros.Views.RegistroView"
+﻿<Window x:Class="Gestor_de_Siniestros.Views.ModificarDelegacionView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Gestor_de_Siniestros.Views" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="registro" Height="950" Width="500"
+        Title="registroDelegacion" Height="870" Width="500"
         AllowsTransparency="True" Background="Transparent"
         WindowStyle="None" ResizeMode="NoResize" MouseDown="Window_MouseDown">
     <Grid>
@@ -25,9 +25,9 @@
             </Border>
 
             <StackPanel VerticalAlignment="Top" Height="106">
-                <Image Source="/Resources/create_account.png" Width="80"
+                <Image Source="/Resources/logo-delegacion.png" Width="80"
                        RenderOptions.BitmapScalingMode="Fant"/>
-                <TextBlock Text="Formulario de Registro"
+                <TextBlock Text="Modificar Delegación"
                            FontWeight="Light"
                            FontFamily="helvetica"
                            FontSize="22"
@@ -46,7 +46,7 @@
                            HorizontalAlignment="Left"
                            Margin="125,0,0,0"/>
                     <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="txtBoxName" 
+                        <TextBox x:Name="txtBoxNombre" 
                              FontFamily="helvetica"
                              FontWeight="Light"                           
                              FontSize="20"
@@ -60,7 +60,7 @@
                              Height="25"
                              Margin="125,0,0,0">
                         </TextBox>
-                        <iconPacks:PackIconMaterial Kind="Account"
+                        <iconPacks:PackIconMaterial Kind="RenameBox"
                                             VerticalAlignment="Center" 
                                             HorizontalAlignment="Center"
                                             Foreground="White"/>
@@ -72,7 +72,7 @@
                 </StackPanel>
 
                 <StackPanel Margin="0,20,0,0">
-                    <Label Content="Apellido Paterno"
+                    <Label Content="Calle"
                            FontFamily="helvetica"
                            FontWeight="Light"
                            FontSize="20"
@@ -80,7 +80,7 @@
                            HorizontalAlignment="Left"
                            Margin="125,0,0,0"/>
                     <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="txtBoxFLastName" 
+                        <TextBox x:Name="txtBoxCalle" 
                              FontFamily="helvetica"
                              FontWeight="Light"                           
                              FontSize="20"
@@ -93,7 +93,7 @@
                              Opacity="0.5"
                              Height="25"
                              Margin="125,0,0,0"/>
-                        <iconPacks:PackIconMaterial Kind="Account"
+                        <iconPacks:PackIconMaterial Kind="DirectionsFork"
                                             VerticalAlignment="Center" 
                                             HorizontalAlignment="Center"
                                             Foreground="White"/>
@@ -107,7 +107,7 @@
 
 
                 <StackPanel Margin="0,20,0,0">
-                    <Label Content="Apellido Materno"
+                    <Label Content="Numero"
                            FontFamily="helvetica"
                            FontWeight="Light"
                            FontSize="20"
@@ -115,7 +115,7 @@
                            HorizontalAlignment="Left"
                            Margin="125,0,0,0"/>
                     <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="txtBoxSLastName" 
+                        <TextBox x:Name="txtBoxNumero" 
                              FontFamily="helvetica"
                              FontWeight="Light"                           
                              FontSize="20"
@@ -128,7 +128,7 @@
                              Opacity="0.5"
                              Height="25"
                              Margin="125,0,0,0"/>
-                        <iconPacks:PackIconMaterial Kind="Account"
+                        <iconPacks:PackIconMaterial Kind="Numeric"
                                             VerticalAlignment="Center" 
                                             HorizontalAlignment="Center"
                                             Foreground="White"/>
@@ -140,7 +140,7 @@
                 </StackPanel>
 
                 <StackPanel Margin="0,20,0,0">
-                    <Label Content="Fecha de nacimiento"
+                    <Label Content="Colonia"
                            FontFamily="helvetica"
                            FontWeight="Light"
                            FontSize="20"
@@ -148,33 +148,7 @@
                            HorizontalAlignment="Left"
                            Margin="125,0,0,0"/>
                     <StackPanel Orientation="Horizontal">
-                        <DatePicker Name="dateBirth"
-                                Background="Transparent"
-                                Foreground="Black"
-                                VerticalAlignment="Center"
-                                Width="250"
-                                Margin="125,0,0,0"/>
-                        <iconPacks:PackIconMaterial Kind="Calendar"
-                                            VerticalAlignment="Center" 
-                                            HorizontalAlignment="Center"
-                                            Foreground="White"/>
-                    </StackPanel>
-                    <Border Width="250"
-                    Height="2"
-                    Background="White"
-                    Opacity="0.5"/>
-                </StackPanel>
-
-                <StackPanel Margin="0,20,0,0">
-                    <Label Content="Celular"
-                           FontFamily="helvetica"
-                           FontWeight="Light"
-                           FontSize="20"
-                           Foreground="White"
-                           HorizontalAlignment="Left"
-                           Margin="125,0,0,0"/>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="txtBoxPhone" 
+                        <TextBox x:Name="txtBoxColonia" 
                              FontFamily="helvetica"
                              FontWeight="Light"                           
                              FontSize="20"
@@ -188,7 +162,41 @@
                              Height="25"
                              Margin="125,0,0,0"
                              MaxLength="10"/>
-                        <iconPacks:PackIconMaterial Kind="Phone"
+                        <iconPacks:PackIconMaterial Kind="Directions"
+                                            VerticalAlignment="Center" 
+                                            HorizontalAlignment="Center"
+                                            Foreground="White"/>
+                    </StackPanel>
+                    <Border Width="250"
+                    Height="2"
+                    Background="White"
+                    Opacity="0.5"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,20,0,0">
+                    <Label Content="Codigo Postal"
+                           FontFamily="helvetica"
+                           FontWeight="Light"
+                           FontSize="20"
+                           Foreground="White"
+                           HorizontalAlignment="Left"
+                           Margin="125,0,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="txtBoxCP" 
+                             FontFamily="helvetica"
+                             FontWeight="Light"                           
+                             FontSize="20"
+                             HorizontalAlignment="Left"
+                             Foreground="White"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             Width="250"
+                             HorizontalContentAlignment="Left"
+                             Opacity="0.5"
+                             Height="25"
+                             Margin="125,0,0,0"
+                             MaxLength="10"/>
+                        <iconPacks:PackIconMaterial Kind="Numeric"
                                             VerticalAlignment="Center" 
                                             HorizontalAlignment="Center"
                                             Foreground="White"/>
@@ -200,7 +208,7 @@
                 </StackPanel>
 
                 <StackPanel Margin="0,20,0,0" >
-                    <Label Content="Correo"
+                    <Label Content="Municipio"
                            FontFamily="helvetica"
                            FontWeight="Light"
                            FontSize="20"
@@ -208,7 +216,7 @@
                            HorizontalAlignment="Left"
                            Margin="125,0,0,0"/>
                     <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="txtBoxEmail" 
+                        <TextBox x:Name="txtBoxMunicipio" 
                              FontFamily="helvetica"
                              FontWeight="Light"                           
                              FontSize="20"
@@ -222,7 +230,7 @@
                              Height="25"
                              Margin="125,0,0,0"
                              />
-                        <iconPacks:PackIconMaterial Kind="Email"
+                        <iconPacks:PackIconMaterial Kind="Directions"
                                             VerticalAlignment="Center" 
                                             HorizontalAlignment="Center"
                                             Foreground="White"/>
@@ -233,42 +241,8 @@
                     Opacity="0.5"/>
                 </StackPanel>
 
-                <StackPanel Margin="0,20,0,0">
-                    <Label Content="Licencia"
-                           FontFamily="helvetica"
-                           FontWeight="Light"
-                           FontSize="20"
-                           Foreground="White"
-                           HorizontalAlignment="Left"
-                           Margin="125,0,0,0"/>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="txtBoxPlaca" 
-                             FontFamily="helvetica"
-                             FontWeight="Light"                           
-                             FontSize="20"
-                             HorizontalAlignment="Left"
-                             Foreground="White"
-                             Background="Transparent"
-                             BorderThickness="0"
-                             Width="250"
-                             HorizontalContentAlignment="Left"
-                             Opacity="0.5"
-                             Height="25"
-                             Margin="125,0,0,0"
-                             MaxLength="10"/>
-                        <iconPacks:PackIconMaterial Kind="IdCard"
-                                            VerticalAlignment="Center" 
-                                            HorizontalAlignment="Center"
-                                            Foreground="White"/>
-                    </StackPanel>
-                    <Border Width="250"
-                    Height="2"
-                    Background="White"
-                    Opacity="0.5"/>
-                </StackPanel>
-                
                 <StackPanel Margin="0,20,0,0" >
-                    <Label Content="Usuario"
+                    <Label Content="Telefono"
                            FontFamily="helvetica"
                            FontWeight="Light"
                            FontSize="20"
@@ -276,7 +250,7 @@
                            HorizontalAlignment="Left"
                            Margin="125,0,0,0"/>
                     <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="txtBoxUsername" 
+                        <TextBox x:Name="txtBoxTelefono" 
                              FontFamily="helvetica"
                              FontWeight="Light"                           
                              FontSize="20"
@@ -289,19 +263,22 @@
                              Opacity="0.5"
                              Height="25"
                              Margin="125,0,0,0"/>
-                        <iconPacks:PackIconMaterial Kind="AccountCircle"
+                        <iconPacks:PackIconMaterial Kind="Phone"
                                             VerticalAlignment="Center" 
                                             HorizontalAlignment="Center"
                                             Foreground="White"/>
+
                     </StackPanel>
                     <Border Width="250"
                     Height="2"
                     Background="White"
                     Opacity="0.5"/>
+                    <Label Content="*Solo numeros locales (7 digitos)"
+                           Margin="125,0,0,0"/>
                 </StackPanel>
 
                 <StackPanel Margin="0,20,0,0">
-                    <Label Content="Contraseña"
+                    <Label Content="Correo"
                            FontFamily="helvetica"
                            FontWeight="Light"
                            FontSize="20"
@@ -309,7 +286,7 @@
                            HorizontalAlignment="Left"
                            Margin="125,0,0,0"/>
                     <StackPanel Orientation="Horizontal">
-                        <PasswordBox x:Name="pswBoxPassword" 
+                        <TextBox x:Name="txtBoxCorreo" 
                              FontFamily="helvetica"
                              FontWeight="Light"                           
                              FontSize="20"
@@ -322,7 +299,7 @@
                              Opacity="0.5"
                              Height="25"
                              Margin="125,0,0,0"/>
-                        <iconPacks:PackIconMaterial Kind="FormTextboxPassword"
+                        <iconPacks:PackIconMaterial Kind="Email"
                                             VerticalAlignment="Center" 
                                             HorizontalAlignment="Center"
                                             Foreground="White"/>
@@ -346,7 +323,6 @@
                             Style="{StaticResource loginButton}"
                             Click="Siguiente_Click"/>
                 </StackPanel>
-
             </StackPanel>
 
         </Grid>

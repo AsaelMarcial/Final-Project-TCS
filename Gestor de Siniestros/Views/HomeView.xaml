@@ -39,6 +39,16 @@
                              IsChecked="True"
                              Click="BtnPerfil"/>
 
+                <RadioButton Content="Conductores"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource EstiloBtnPrincipal}"
+                             Click="BtnConductores"
+                             Visibility="Collapsed"
+                             x:Name="conductores"/>
+
+
                 <RadioButton Content="Vehiculos"
                              Height="50"
                              Foreground="White"
@@ -78,7 +88,7 @@
                              Visibility="Collapsed"
                              x:Name="delegaciones"/>
 
-                <RadioButton Content="Panel de Control"
+                <RadioButton Content="Administracion de usarios"
                              Height="50"
                              Visibility="Collapsed"
                              Foreground="White"

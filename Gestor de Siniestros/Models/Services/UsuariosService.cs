@@ -9,26 +9,31 @@ namespace Gestor_de_Siniestros.Models.Services
 {
     public class UsuariosService
     {
-        private static List<Usuarios> ObjUserList;
         private DataBaseEntities DataBase;
 
         public UsuariosService()
         {
             DataBase = new DataBaseEntities();
-            ObjUserList = new List<Usuarios>();
-            using (DataBaseEntities database = new DataBaseEntities())
-            {
-                var lst = database.Usuarios;
-                foreach (var OUsuario in lst)
-                {
-                    ObjUserList.Add(OUsuario);
-                }
-            }
+            
         }
 
         public List<Usuarios> GetAll()
         {
-            return ObjUserList;
+            List<Usuarios> ObjUsuarioList = new List<Usuarios>();
+            try
+            {
+                var ObjQuery = from usuarios in DataBase.Usuarios select usuarios;
+                foreach (var usuario in ObjQuery)
+                {
+                    ObjUsuarioList.Add(usuario);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return ObjUsuarioList;
         }
 
         public bool Add(Usuarios ObjNewUsuario)
@@ -45,8 +50,12 @@ namespace Gestor_de_Siniestros.Models.Services
             try
             {
                 var ObjUser = DataBase.Usuarios.Find(ObjUsuarioToUpdate.idUsuario);
+                ObjUser.nombre = ObjUsuarioToUpdate.nombre;
+                ObjUser.aPaterno = ObjUsuarioToUpdate.aPaterno;
+                ObjUser.aMaterno = ObjUsuarioToUpdate.aMaterno;
                 ObjUser.celular = ObjUsuarioToUpdate.celular;
                 ObjUser.email = ObjUsuarioToUpdate.email;
+                ObjUser.idLicencia = ObjUsuarioToUpdate.idLicencia;
                 ObjUser.delegacion = ObjUsuarioToUpdate.delegacion;
                 var NoRowsAffected = DataBase.SaveChanges();
                 IsUpdated = NoRowsAffected > 0;
@@ -74,31 +83,40 @@ namespace Gestor_de_Siniestros.Models.Services
 
         private void validateUser(Usuarios user)
         {
-            if (user == null)
+            try
             {
-                throw new ArgumentNullException("Usuario", "Error en Update");
-            }
+                if (user == null)
+                {
+                    throw new ArgumentNullException("Usuario", "Error en Update");
+                }
 
-            if (string.IsNullOrEmpty(user.nombre))
-            {
-                throw new ArgumentNullException("Nombre", "Porfavor ingresa un nombre");
+                if (string.IsNullOrEmpty(user.nombre))
+                {
+                    throw new ArgumentNullException("Nombre", "Porfavor ingresa un nombre");
+                }
+                else if (string.IsNullOrEmpty(user.aPaterno))
+                {
+                    throw new ArgumentNullException("Apellido Paterno", "Porfavor ingresa un Apellido Paterno");
+                }
+                else if (string.IsNullOrEmpty(user.email))
+                {
+                    throw new ArgumentNullException("Email", "Porfavor ingresa un Apellido Paterno");
+                }
+                else if (user.celular.HasValue == false)
+                {
+                    throw new ArgumentNullException("Celular", "Porfavor ingresa un Numero de celular");
+                }
+                else if (string.IsNullOrEmpty(user.contraseña))
+                {
+                    throw new ArgumentNullException("Contraseña", "Porfavor ingresa una contraseña");
+                }
             }
-            else if (string.IsNullOrEmpty(user.aPaterno))
+            catch (Exception ex)
             {
-                throw new ArgumentNullException("Apellido Paterno", "Porfavor ingresa un Apellido Paterno");
+
+                throw ex;
             }
-            else if (string.IsNullOrEmpty(user.email))
-            {
-                throw new ArgumentNullException("Email", "Porfavor ingresa un Apellido Paterno");
-            }
-            else if (user.celular.HasValue == false)
-            {
-                throw new ArgumentNullException("Celular", "Porfavor ingresa un Numero de celular");
-            }
-            else if (string.IsNullOrEmpty(user.contraseña))
-            {
-                throw new ArgumentNullException("Contraseña", "Porfavor ingresa una contraseña");
-            }
+            
         }
     }
 }

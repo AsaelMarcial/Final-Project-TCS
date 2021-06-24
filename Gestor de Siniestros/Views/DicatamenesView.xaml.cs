@@ -27,12 +27,14 @@ namespace Gestor_de_Siniestros.Views
         Usuarios _currentUser;
         DataBaseEntities DataBase;
         VerReporteView verReporte;
+        ReportesService reporteService;
 
         public DicatamenesView()
         {
             InitializeComponent();
             _currentUser = new Usuarios();
             DataBase = new DataBaseEntities();
+            reporteService = new ReportesService();
         }
         private void Agregar_Click(object sender, RoutedEventArgs e)
         {
@@ -43,20 +45,25 @@ namespace Gestor_de_Siniestros.Views
 
         internal void LoadData(Usuarios currentUser)
         {
-            var reportes = new List<ReporteCompletoService>();
-
+            var reportes = new List<ReporteModel>();
             _currentUser = currentUser;
             try
             {
-                var reportesUsuario = DataBase.ReportesUsuarios.Where(u => u.idUsuario == currentUser.idUsuario).ToList();
+                var ListaReportes = reporteService.GetAll();
 
-                foreach (var report in reportesUsuario)
+                foreach (var report in ListaReportes)
                 {
-                    ReporteCompletoService currentReporte = new ReporteCompletoService();
-                    currentReporte.IdReporte = DataBase.Reportes.Where(r => r.idReporte == report.idReporte).Select(x => x.idReporte).FirstOrDefault();
-                    currentReporte.Direccion = DataBase.Reportes.Where(r => r.idReporte == report.idReporte).Select(x => x.direccion).FirstOrDefault();
-                    currentReporte.FechaReporte = DataBase.Reportes.Where(r => r.idReporte == report.idReporte).Select(x => x.fechaReporte).FirstOrDefault();
-                    reportes.Add(currentReporte);
+                    ReporteModel currentReporte = new ReporteModel();
+                    DateTime fecha = report.fechaReporte;
+                    currentReporte.id = report.idReporte;
+                    currentReporte.Fecha = fecha.ToString("MMMM dd, yyyy");
+                    currentReporte.Direccion = report.direccion;
+                    currentReporte.Creador = report.creador;
+                    currentReporte.Estado = DataBase.Dictamenes.Where(e => e.idDictamen == report.idDictamen).Select(x => x.estado).FirstOrDefault();
+                    if (currentReporte.Estado.Equals("Pendiente"))
+                    {
+                        reportes.Add(currentReporte);
+                    }
                 }
                 dgReportes.ItemsSource = reportes;
 
@@ -69,9 +76,9 @@ namespace Gestor_de_Siniestros.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ReporteCompletoService idSelecteReporte = (ReporteCompletoService)dgReportes.SelectedItem;
+            ReporteModel idSelecteReporte = (ReporteModel)dgReportes.SelectedItem;
             verReporte = new VerReporteView();
-            verReporte.LoadData(idSelecteReporte.IdReporte, _currentUser);
+            verReporte.LoadData(idSelecteReporte.id, _currentUser);
             verReporte.ShowDialog();
 
         }

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Gestor_de_Siniestros.Views.ReporteView"
+﻿<UserControl x:Class="Gestor_de_Siniestros.Views.UsuariosView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel>
-            <Label Content="Reportes"
+            <Label Content="Conductores"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    FontSize="30"
@@ -22,26 +22,26 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1">
-            <DataGrid x:Name="dgReportes"
+            <DataGrid x:Name="dgConductores"
                       Height="300"
                       Width="700"
                       IsReadOnly="True"
-                      SelectionMode="Single"
-                      AutoGenerateColumns="False">
+                      AutoGenerateColumns="False"
+                      SelectionMode="Single">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Dirección" Binding="{Binding Direccion}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Creador" Binding="{Binding Creador}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Estado" Binding="{Binding Estado}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Apellido" Binding="{Binding Apellido}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Fecha Nacimiento" Binding="{Binding Fecha}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Licencia" Binding="{Binding Licencia}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Celular" Binding="{Binding Celular}"></DataGridTextColumn>
                 </DataGrid.Columns>
-                
             </DataGrid>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10,10,10,10">
             <StackPanel Orientation="Vertical">
-                <Label Content="Busqueda por Dirección"
-                       Margin="40,0,10,0"/>
+                <Label Content="Busqueda por Nombre"
+                       Margin="40,0,0,0"/>
                 <TextBox BorderThickness="0"
                      Background="#CFCFCF"
                      Foreground="Black"
@@ -57,21 +57,26 @@
                     Background="Gray"
                     Style="{StaticResource generalButton}" 
                     Click="btnBuscar_Click"/>
-            <Button Content="Ver"
+            <Button x:Name="btnVer"
+                    Style="{StaticResource generalButton}"
+                    Width="100"
+                    Height="50"
+                    Margin="10,0,0,0"
+                    Content="Ver"
+                    Background="#FFC300" Click="btnVer_Click"/>
+            <Button Content="Registrar Vehiculo"
                     Background="#3581BC"
-                    Width="100"
+                    Width="120"
                     Height="50"
                     Style="{StaticResource generalButton}"
-                    Margin="100,0,30,0" 
-                    Click="Button_Click"/>
-            <Button Content="Levantar reporte"
+                    Margin="10,15,10,15" 
+                    Click="RegistroVehiculo_Click"/>
+            <Button Content="Registrar Conductor"
                     Background="#28AD56"
-                    Width="100"
+                    Width="120"
                     Height="50"
                     Style="{StaticResource generalButton}"
-                    Visibility="Collapsed"
-                    Click="Agregar_Click"
-                    x:Name="btnNuevoReporte"/>
+                    Click="Agregar_Click"/>
         </StackPanel>
 
     </Grid>

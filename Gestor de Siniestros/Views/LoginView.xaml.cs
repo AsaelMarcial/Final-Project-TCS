@@ -1,25 +1,13 @@
 ﻿using Gestor_de_Siniestros.Models.DB;
 using Gestor_de_Siniestros.Views;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Gestor_de_Siniestros
 {
-    /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
-    /// </summary>
+
     public partial class LoginView : Window
     {
         public LoginView()
@@ -76,12 +64,6 @@ namespace Gestor_de_Siniestros
                     MessageBox.Show("Revisar campos vacios!");
                 }
             }
-        }
-
-        private void Registro_Click(object sender, RoutedEventArgs e)
-        {
-            RegistroView registro = new RegistroView();
-            registro.ShowDialog();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

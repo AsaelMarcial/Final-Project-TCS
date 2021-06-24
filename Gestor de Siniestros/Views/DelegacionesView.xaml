@@ -24,7 +24,9 @@
         <StackPanel Grid.Row="1">
             <DataGrid x:Name="dgDelegaciones"
                       Height="300"
-                      Width="700"/>
+                      Width="700"
+                      IsReadOnly="True"
+                      SelectionMode="Single"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10,10,10,10">
@@ -33,7 +35,7 @@
                     Width="100"
                     Height="50"
                     Style="{StaticResource generalButton}"
-                    Margin="510,0,30,0"/>
+                    Margin="510,0,30,0" Click="Button_Click"/>
             <Button Content="Agregar"
                     Background="#28AD56"
                     Width="100"

@@ -2,24 +2,11 @@
 using Gestor_de_Siniestros.Models.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Gestor_de_Siniestros.Views
 {
-    /// <summary>
-    /// Lógica de interacción para VehiculosView.xaml
-    /// </summary>
     public partial class VehiculosView : UserControl
     {
         Usuarios _currentUser;
@@ -42,18 +29,31 @@ namespace Gestor_de_Siniestros.Views
         {
 
             registro = new RegistroVehiculoView();
-            registro.LoadUser(_currentUser);
+            registro.LoadUser(_currentUser.idUsuario);
             registro.ShowDialog();
             actualizar.Visibility = Visibility.Visible;
         }
 
         internal void LoadData(Usuarios currentUser)
         {
+            var ObjVehiculo = new List<VehiculoModel>();
             _currentUser.idUsuario = currentUser.idUsuario;
             try
             {
-                var vehiculos = DataBase.Vehiculos.Where(v => v.idDueño == currentUser.idUsuario).Select(v => new { v.idVehiculo, v.placa, v.marca, v.modelo, v.tipoPropiedad, v.nombreAseguradora, v.idPoliza }).ToList();
-                dgVehiculos.ItemsSource = vehiculos;
+                var vehiculos = vehiculosService.GetAll();
+                foreach (var vehiculo in vehiculos)
+                {
+                    VehiculoModel currentVehiculo = new VehiculoModel();
+                    currentVehiculo.id = vehiculo.idVehiculo;
+                    currentVehiculo.Placa = vehiculo.placa;
+                    currentVehiculo.Marca = vehiculo.marca;
+                    currentVehiculo.Modelo = vehiculo.modelo;
+                    currentVehiculo.Año = vehiculo.año;
+                    currentVehiculo.Color = vehiculo.color;
+                    currentVehiculo.Aseguradora = vehiculo.nombreAseguradora;
+                    ObjVehiculo.Add(currentVehiculo);
+                }
+                dgVehiculos.ItemsSource = ObjVehiculo;
             }
             catch (Exception ex)
             {

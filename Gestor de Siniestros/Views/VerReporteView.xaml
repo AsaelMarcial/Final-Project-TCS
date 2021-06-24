@@ -63,16 +63,16 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                     <StackPanel Margin="20,0,0,0">
-                        <Label Content="Fecha del reporte"
+                        <Label Content="Fecha reporte"
                        Foreground="#D3DCE6"
                        FontSize="15"/>
                         <TextBox IsReadOnly="True"
                          Width="200"
                          Style="{StaticResource transparentTextBox}"
-                         x:Name="dateFechaReporte"/>
+                         x:Name="dateReporte"/>
                     </StackPanel>
                     <StackPanel Margin="20,0,0,0">
-                        <Label Content="Delegación"
+                        <Label Content="Delegacion"
                        Foreground="#D3DCE6"
                        FontSize="15"/>
                         <TextBox IsReadOnly="True"
@@ -81,7 +81,7 @@
                          x:Name="txtBoxDelegacion"/>
                     </StackPanel>
                     <StackPanel Margin="20,0,0,0">
-                        <Label Content="Estado (Dictamen)"
+                        <Label Content="Estado"
                        Foreground="#D3DCE6"
                        FontSize="15"/>
                         <TextBox IsReadOnly="True"
@@ -132,21 +132,57 @@
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Margin="0,0,0,0">
-                    <Label Content="Involucrados"
+                    <Label Content="Conductores Involucrados"
                            HorizontalAlignment="Center"
                            Foreground="#D3DCE6"
                            FontSize="15"/>
                     <DataGrid Height="100"
                               Width="600"
                               IsReadOnly="True"
-                              x:Name="dgInvolucrados"/>
+                              x:Name="dgConductores"
+                              SelectionMode="Single"
+                              AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID Conductor" Binding="{Binding idUsuario}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Nombre" Binding="{Binding nombre}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Apellido" Binding="{Binding aPaterno}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Licencia" Binding="{Binding idLicencia}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Celular" Binding="{Binding celular}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                       
+                    </DataGrid>
                 </StackPanel>
+
+                <StackPanel Margin="0,0,0,0">
+                    <Label Content="Vehiculos Involucrados"
+                           HorizontalAlignment="Center"
+                           Foreground="#D3DCE6"
+                           FontSize="15"/>
+                    <DataGrid Height="100"
+                              Width="600"
+                              IsReadOnly="True"
+                              x:Name="dgVehiculos"
+                              SelectionMode="Single"
+                              AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID Dueño" Binding="{Binding idDueño}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Placa" Binding="{Binding placa}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Marca" Binding="{Binding marca}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Modelo" Binding="{Binding modelo}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Año" Binding="{Binding año}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Color" Binding="{Binding color}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Aseguradora" Binding="{Binding nombreAseguradora}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+                </StackPanel>
+
                 <StackPanel Margin="0,0,0,0">
                     <Label Content="Fotografias del siniestro"
                            HorizontalAlignment="Center"
                            Foreground="#D3DCE6"
                            FontSize="15"/>
-                    <DataGrid Height="300"
+                    <DataGrid Height="150"
                               Width="600"
                               IsReadOnly="True"
                               AutoGenerateColumns="False"
@@ -217,7 +253,7 @@
                     Background="#28AD56"
                     Width="100"
                     Height="50"
-                    Margin="20,0,50,0"
+                    Margin="20,0,10,0"
                     Style="{StaticResource generalButton}" 
                     x:Name="Salir" Click="Salir_Click"/>
                     <Button Content="Dictaminar"
