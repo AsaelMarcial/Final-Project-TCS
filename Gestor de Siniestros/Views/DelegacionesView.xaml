@@ -26,7 +26,19 @@
                       Height="300"
                       Width="700"
                       IsReadOnly="True"
-                      SelectionMode="Single"/>
+                      SelectionMode="Single"
+                      AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding nombre}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Calle" Binding="{Binding calle}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Numero" Binding="{Binding numero}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Colonia" Binding="{Binding colonia}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Codigo Postal" Binding="{Binding codigoPostal}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Municipio" Binding="{Binding municipio}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Telefono" Binding="{Binding telefono}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Correo" Binding="{Binding correo}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10,10,10,10">

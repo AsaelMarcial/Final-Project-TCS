@@ -10,6 +10,7 @@ namespace Gestor_de_Siniestros.Views
     {
         DelegacionesService delegacioneService;
         Delegaciones currentDelegacion;
+        ObserverRespuesta notificacion;
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -22,6 +23,11 @@ namespace Gestor_de_Siniestros.Views
             InitializeComponent();
             delegacioneService = new DelegacionesService();
             currentDelegacion = new Delegaciones();
+        }
+
+        public ModificarDelegacionView(ObserverRespuesta notificacion) : this()
+        {
+            this.notificacion = notificacion;
         }
 
         private void Cancelar_Click(object sender, RoutedEventArgs e)
@@ -81,6 +87,7 @@ namespace Gestor_de_Siniestros.Views
                 if(delegacioneService.Update(currentDelegacion) == true)
                 {
                     MessageBox.Show("Delegacion modificada correctamente.");
+                    notificacion.actualizaInformacion("Delegacion modificada.");
                     this.Close();
                 }
                 else

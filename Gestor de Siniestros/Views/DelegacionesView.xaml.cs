@@ -6,7 +6,7 @@ using System.Windows.Controls;
 namespace Gestor_de_Siniestros.Views
 {
 
-    public partial class DelegacionesView : UserControl
+    public partial class DelegacionesView : UserControl, ObserverRespuesta
     {
         RegistroDelegacionView registroDelegacionView;
         DataBaseEntities DataBase;
@@ -23,7 +23,7 @@ namespace Gestor_de_Siniestros.Views
 
         private void Agregar_Click(object sender, RoutedEventArgs e)
         {
-            registroDelegacionView = new RegistroDelegacionView();
+            registroDelegacionView = new RegistroDelegacionView(this);
             registroDelegacionView.ShowDialog();
         }
 
@@ -35,7 +35,7 @@ namespace Gestor_de_Siniestros.Views
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Delegaciones idSelected = (Delegaciones)dgDelegaciones.SelectedItem;
-            ModificarDelegacionView modificarDelegacionView = new ModificarDelegacionView();
+            ModificarDelegacionView modificarDelegacionView = new ModificarDelegacionView(this);
             if (idSelected == null)
             {
                 MessageBox.Show("Selecciona elemento de la lista.");
@@ -47,6 +47,12 @@ namespace Gestor_de_Siniestros.Views
                 modificarDelegacionView.ShowDialog();
             }
             
+        }
+
+        public void actualizaInformacion(string operacion)
+        {
+            dgDelegaciones.ItemsSource = null;
+            LoadData();
         }
     }
 }

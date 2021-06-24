@@ -93,7 +93,7 @@ namespace Gestor_de_Siniestros.Views
         {
             ImagenService currentImage;
             OpenFileDialog fileChooser = new OpenFileDialog();
-            fileChooser.InitialDirectory = "c:\\";
+            fileChooser.InitialDirectory = "C:\\Users\\asael\\Imágenes\\Siniestros";
             fileChooser.Multiselect = false;
             fileChooser.Filter = "Todas las imagenes|*jpg;*png;*bmp|JPG|*jpg|PNG|*png|BMP|*bmp";
             fileChooser.FilterIndex = 1;

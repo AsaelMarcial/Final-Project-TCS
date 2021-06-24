@@ -23,12 +23,18 @@ namespace Gestor_de_Siniestros.Views
     {
         Delegaciones currentDelegacion;
         DelegacionesService delegacionesService;
+        ObserverRespuesta notificacion;
 
         public RegistroDelegacionView()
         {
             InitializeComponent();
             currentDelegacion = new Delegaciones();
             delegacionesService = new DelegacionesService();
+        }
+
+        public RegistroDelegacionView(ObserverRespuesta notificacion) : this()
+        {
+            this.notificacion = notificacion;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -93,6 +99,7 @@ namespace Gestor_de_Siniestros.Views
                 currentDelegacion.correo = correo;
                 delegacionesService.Add(currentDelegacion);
                 MessageBox.Show("Delegacion registrada correctamente.");
+                notificacion.actualizaInformacion("Delgacion guardada.");
                 this.Close();
             }
             else

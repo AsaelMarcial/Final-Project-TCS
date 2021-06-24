@@ -16,12 +16,18 @@ namespace Gestor_de_Siniestros.Views
         ReportesService reportesService;
         int id;
         int idPerito;
+        ObserverRespuesta notificacion;
 
         public VerReporteView()
         {
             InitializeComponent();
             DataBase = new DataBaseEntities();
             reportesService = new ReportesService();
+        }
+
+        public VerReporteView(ObserverRespuesta notificacion) : this()
+        {
+            this.notificacion = notificacion;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -119,6 +125,7 @@ namespace Gestor_de_Siniestros.Views
             DictaminarView dictaminarView = new DictaminarView();
             dictaminarView.LoadData(id, idPerito);
             dictaminarView.ShowDialog();
+            notificacion.actualizaInformacion("Clic en dictaminar");
             this.Close();
         }
     }

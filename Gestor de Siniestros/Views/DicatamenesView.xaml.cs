@@ -3,24 +3,13 @@ using Gestor_de_Siniestros.Models.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Gestor_de_Siniestros.Views
 {
-    /// <summary>
-    /// Lógica de interacción para DicatamenesView.xaml
-    /// </summary>
-    public partial class DicatamenesView : UserControl
+
+    public partial class DicatamenesView : UserControl, ObserverRespuesta
     {
 
         RegistroReporteView registroView;
@@ -28,6 +17,7 @@ namespace Gestor_de_Siniestros.Views
         DataBaseEntities DataBase;
         VerReporteView verReporte;
         ReportesService reporteService;
+        List<ReporteModel> reportes;
 
         public DicatamenesView()
         {
@@ -35,17 +25,12 @@ namespace Gestor_de_Siniestros.Views
             _currentUser = new Usuarios();
             DataBase = new DataBaseEntities();
             reporteService = new ReportesService();
-        }
-        private void Agregar_Click(object sender, RoutedEventArgs e)
-        {
-            registroView = new RegistroReporteView();
-            registroView.LoadData(_currentUser);
-            registroView.ShowDialog();
+            reportes = new List<ReporteModel>();
         }
 
         internal void LoadData(Usuarios currentUser)
         {
-            var reportes = new List<ReporteModel>();
+            
             _currentUser = currentUser;
             try
             {
@@ -77,11 +62,17 @@ namespace Gestor_de_Siniestros.Views
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ReporteModel idSelecteReporte = (ReporteModel)dgReportes.SelectedItem;
-            verReporte = new VerReporteView();
+            verReporte = new VerReporteView(this);
             verReporte.LoadData(idSelecteReporte.id, _currentUser);
             verReporte.ShowDialog();
 
         }
 
+        public void actualizaInformacion(string operacion)
+        {
+            reportes.Clear();
+            dgReportes.ItemsSource = null;
+            LoadData(_currentUser);
+        }
     }
 }

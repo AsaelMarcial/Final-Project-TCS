@@ -21,6 +21,12 @@ namespace Gestor_de_Siniestros.Views
             delegacionesService = new DelegacionesService();
             DataBase = new DataBaseEntities();
             UsuariosService = new UsuariosService();
+            LoadCombo();
+        }
+
+        public void LoadCombo()
+        {
+            comboBoxDelegacion.ItemsSource = delegacionesService.GetDelegacionesNames();
         }
 
 

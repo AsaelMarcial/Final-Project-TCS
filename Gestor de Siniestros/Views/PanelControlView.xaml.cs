@@ -18,18 +18,18 @@ using System.Windows.Shapes;
 namespace Gestor_de_Siniestros.Views
 {
 
-    public partial class PanelControlView : UserControl
+    public partial class PanelControlView : UserControl, ObserverRespuesta
     {
         UsuariosService userService;
         DataBaseEntities DataBase;
-        List<ConductorModel> ObjUsuarios;
+        List<Usuarios> ObjUsuarios;
 
         public PanelControlView()
         {
             InitializeComponent();
             userService = new UsuariosService();
             DataBase = new DataBaseEntities();
-            ObjUsuarios = new List<ConductorModel>();
+            ObjUsuarios = new List<Usuarios>();
             LoadData();
         }
 
@@ -37,20 +37,9 @@ namespace Gestor_de_Siniestros.Views
         {
             try
             {
-                var usuarios = userService.GetAll();
-                /*foreach (var usuario in usuarios)
-                {
-                    DateTime fecha = usuario.fechaNacimiento;
-                    ConductorModel conductor = new ConductorModel();
-                    conductor.id = usuario.idUsuario;
-                    conductor.Nombre = usuario.nombre;
-                    conductor.Apellido = usuario.aPaterno + " " + usuario.aMaterno;
-                    conductor.Fecha = fecha.ToString("MMMM dd, yyyy");
-                    conductor.Licencia = usuario.idLicencia;
-                    conductor.Celular = usuario.celular.ToString();
-                    ObjUsuarios.Add(conductor);
-                }*/
-                dgUsuarios.ItemsSource = usuarios;
+                ObjUsuarios = userService.GetAll();
+
+                dgUsuarios.ItemsSource = ObjUsuarios;
             }
             catch (Exception ex)
             {
@@ -60,14 +49,14 @@ namespace Gestor_de_Siniestros.Views
 
         private void Agregar_Click(object sender, RoutedEventArgs e)
         {
-            RegistroView registro = new RegistroView();
+            RegistroView registro = new RegistroView(this);
             registro.ShowDialog();
         }
 
         private void actualizar_Click(object sender, RoutedEventArgs e)
         {
             Usuarios idSelected = (Usuarios)dgUsuarios.SelectedItem;
-            ModificarUsuarioView modificarView = new ModificarUsuarioView();
+            ModificarUsuarioView modificarView = new ModificarUsuarioView(this);
             if (idSelected == null)
             {
                 MessageBox.Show("Selecciona elemento de la lista.");
@@ -102,6 +91,13 @@ namespace Gestor_de_Siniestros.Views
                 usuarioView.LoadData(usuarioEnvio);
                 usuarioView.ShowDialog();
             }
+        }
+
+        public void actualizaInformacion(string operacion)
+        {
+            ObjUsuarios.Clear();
+            dgUsuarios.ItemsSource = null;
+            LoadData();
         }
     }
 }

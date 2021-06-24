@@ -14,7 +14,7 @@ namespace Gestor_de_Siniestros.Views
         Usuarios usuarioActualizado;
         Usuarios currentUser;
         ConductorModel conductor;
-
+        ObserverRespuesta notificacion;
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -30,6 +30,11 @@ namespace Gestor_de_Siniestros.Views
             usuarioActualizado = new Usuarios();
             conductor = new ConductorModel();
             currentUser = new Usuarios();
+        }
+
+        public ModificarUsuarioView(ObserverRespuesta notificacion) : this()
+        {
+            this.notificacion = notificacion;
         }
 
         internal void LoadData(Usuarios idSelected)
@@ -94,6 +99,7 @@ namespace Gestor_de_Siniestros.Views
             else
             {
                 MessageBox.Show("Usuario modificado correctamente.");
+                notificacion.actualizaInformacion("Clic en siguiente");
                 this.Close();
             }
         }
