@@ -23,8 +23,19 @@
 
         <StackPanel Grid.Row="1">
             <DataGrid x:Name="dgUsuarios"
-                      Height="300" 
-                      IsReadOnly="True"/>
+                      Height="300"
+                      Width="700"
+                      IsReadOnly="True"
+                      AutoGenerateColumns="False"
+                      SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding nombre}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Apellido" Binding="{Binding aPaterno}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Fecha Nacimiento" Binding="{Binding fechaNacimiento}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Licencia" Binding="{Binding idLicencia}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Celular" Binding="{Binding celular}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10,10,10,10">

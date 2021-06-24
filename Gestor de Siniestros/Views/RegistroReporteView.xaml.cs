@@ -71,7 +71,7 @@ namespace Gestor_de_Siniestros.Views
             foreach (var conductor in ObjVehiculosList)
             {
                 var oUser = new Usuarios();
-                oUser = DataBase.Usuarios.Where(u => u.idUsuario == conductor.id).FirstOrDefault();
+                oUser = DataBase.Usuarios.Where(x => x.idUsuario == conductor.idDueño).FirstOrDefault(); ;
                 ObjUsuariosList.Add(oUser);
             }
             int idDelegacion = DataBase.Delegaciones.Where(u => u.nombre == comboBoxDelegacion.SelectedValue.ToString()).Select(u => u.idDelegacion).FirstOrDefault();
@@ -140,6 +140,7 @@ namespace Gestor_de_Siniestros.Views
                     current.Año = vehiculo.año;
                     current.Color = vehiculo.color;
                     current.Aseguradora = vehiculo.nombreAseguradora;
+                    current.idDueño = vehiculo.idDueño;
                     ObjVehiculosList.Add(current);
                     txtBoxPlaca.Text = "";
                 }

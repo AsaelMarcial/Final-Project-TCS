@@ -24,13 +24,25 @@ namespace Gestor_de_Siniestros.Views
 
         public ModificarUsuarioView()
         {
-
+            InitializeComponent();
             DataBase = new DataBaseEntities();
             usuarioService = new UsuariosService();
             usuarioActualizado = new Usuarios();
             conductor = new ConductorModel();
             currentUser = new Usuarios();
-            InitializeComponent();
+        }
+
+        internal void LoadData(Usuarios idSelected)
+        {
+            usuarioActualizado = idSelected;
+            txtBoxEmail.Text = idSelected.email;
+            txtBoxFLastName.Text = idSelected.aPaterno;
+            txtBoxName.Text = idSelected.nombre;
+            txtBoxPhone.Text = idSelected.celular.ToString();
+            txtBoxPlaca.Text = idSelected.idLicencia;
+            txtBoxSLastName.Text = idSelected.aMaterno;
+            comboTipo.SelectedIndex = idSelected.tipoUsuario - 1;
+
         }
 
         private void Siguiente_Click(object sender, RoutedEventArgs e)
@@ -49,58 +61,46 @@ namespace Gestor_de_Siniestros.Views
             }
             usuarioActualizado.email = txtBoxEmail.Text;
             usuarioActualizado.idLicencia = txtBoxPlaca.Text;
-            if (comboTipo.SelectedItem.Equals("Administrativo"))
+            if (comboTipo.SelectedIndex == 0)
             {
                 usuarioActualizado.tipoUsuario = 1;
             }
-            if (comboTipo.SelectedItem.Equals("Perito"))
+            if (comboTipo.SelectedIndex == 1)
             {
                 usuarioActualizado.tipoUsuario = 2;
             }
-            if (comboTipo.SelectedItem.Equals("Conductor"))
+            if (comboTipo.SelectedIndex == 2)
             {
                 usuarioActualizado.tipoUsuario = 3;
             }
-            if (comboTipo.SelectedItem.Equals("Soporte"))
+            if (comboTipo.SelectedIndex == 3)
             {
                 usuarioActualizado.tipoUsuario = 4;
             }
-            if (comboTipo.SelectedItem.Equals("Atención al cliente"))
+            if (comboTipo.SelectedIndex == 4)
             {
                 usuarioActualizado.tipoUsuario = 5;
             }
-            if (comboTipo.SelectedItem.Equals("Agente de transito"))
+            if (comboTipo.SelectedIndex == 5)
             {
                 usuarioActualizado.tipoUsuario = 6;
             }
 
-            if(usuarioService.Update(usuarioActualizado) == true)
+            if(usuarioService.Update(usuarioActualizado) == false)
             {
-                MessageBox.Show("Usuario modificado correctamente.");
-                this.Close();
+                MessageBox.Show("Error Al modificar usuario.");
+
             }
             else
             {
-                MessageBox.Show("Error Al modificar usuario.");
+                MessageBox.Show("Usuario modificado correctamente.");
+                this.Close();
             }
         }
 
         private void Cancelar_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        internal void LoadData(ConductorModel idSelected)
-        {            
-            /*
-            txtBoxEmail.Text = idSelected.email;
-            txtBoxFLastName.Text = idSelected.aPaterno;
-            txtBoxName.Text = idSelected.nombre;
-            txtBoxPhone.Text = idSelected.celular.ToString();
-            txtBoxPlaca.Text = idSelected.idLicencia;
-            txtBoxSLastName.Text = idSelected.aMaterno;
-            comboTipo.SelectedIndex = idSelected.tipoUsuario - 1;*/
-
         }
     }
 }

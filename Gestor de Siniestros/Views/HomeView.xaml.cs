@@ -33,6 +33,7 @@ namespace Gestor_de_Siniestros.Views
             if (currentUser.tipoUsuario == 1)
             {
                 panelControl.Visibility = Visibility.Visible;
+                vehiculos.Visibility = Visibility.Visible;
             }
 
             if (currentUser.tipoUsuario == 2)
@@ -51,7 +52,8 @@ namespace Gestor_de_Siniestros.Views
             perfilView.LoadData(currentUser);
             vehiculosView.LoadData(currentUser);
             reporteView.LoadData(currentUser);
-            //chatView.LoadData(currentUser);
+            chatView.LoadData(currentUser);
+            usuariosView.LoadData();
             dicatamenesView.LoadData(currentUser);
             Container.Child = perfilView;
         }
@@ -78,7 +80,7 @@ namespace Gestor_de_Siniestros.Views
 
         private void BtnChat(object sender, RoutedEventArgs e)
         {
-          //  Container.Child = chatView;
+            Container.Child = chatView;
         }
 
         private void BtnDictamenes(object sender, RoutedEventArgs e)

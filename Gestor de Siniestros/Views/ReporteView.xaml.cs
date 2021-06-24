@@ -109,6 +109,7 @@ namespace Gestor_de_Siniestros.Views
 
         public void actualizaInformacion(string operacion)
         {
+            reportes.Clear();
             dgReportes.ItemsSource = null;
             LoadData(_currentUser);
         }

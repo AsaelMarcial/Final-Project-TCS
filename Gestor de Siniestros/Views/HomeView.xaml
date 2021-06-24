@@ -50,9 +50,11 @@
 
 
                 <RadioButton Content="Vehiculos"
+                             x:Name="vehiculos"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
+                             Visibility="Collapsed"
                              Style="{StaticResource EstiloBtnPrincipal}"
                              Click="BtnVehiculos"/>
 

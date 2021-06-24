@@ -15,6 +15,7 @@ namespace Gestor_de_Siniestros.Models.Services
         public int Año { get; set; }
         public String Color { get; set; }
         public String Aseguradora { get; set; }
+        public int idDueño { get; set; }
 
         public VehiculoModel(string placa, string marca, string modelo, int año, string color, string aseguradora)
         {
@@ -28,6 +29,18 @@ namespace Gestor_de_Siniestros.Models.Services
 
         public VehiculoModel()
         {
+        }
+
+        public VehiculoModel(int id, string placa, string marca, string modelo, int año, string color, string aseguradora, int idDueño)
+        {
+            this.id = id;
+            Placa = placa;
+            Marca = marca;
+            Modelo = modelo;
+            Año = año;
+            Color = color;
+            Aseguradora = aseguradora;
+            this.idDueño = idDueño;
         }
     }
 }

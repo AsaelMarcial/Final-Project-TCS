@@ -56,6 +56,7 @@ namespace Gestor_de_Siniestros.Models.Services
                 ObjUser.celular = ObjUsuarioToUpdate.celular;
                 ObjUser.email = ObjUsuarioToUpdate.email;
                 ObjUser.idLicencia = ObjUsuarioToUpdate.idLicencia;
+                ObjUser.tipoUsuario = ObjUsuarioToUpdate.tipoUsuario;
                 ObjUser.delegacion = ObjUsuarioToUpdate.delegacion;
                 var NoRowsAffected = DataBase.SaveChanges();
                 IsUpdated = NoRowsAffected > 0;

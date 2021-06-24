@@ -38,7 +38,7 @@ namespace Gestor_de_Siniestros.Views
             try
             {
                 var usuarios = userService.GetAll();
-                foreach (var usuario in usuarios)
+                /*foreach (var usuario in usuarios)
                 {
                     DateTime fecha = usuario.fechaNacimiento;
                     ConductorModel conductor = new ConductorModel();
@@ -49,8 +49,8 @@ namespace Gestor_de_Siniestros.Views
                     conductor.Licencia = usuario.idLicencia;
                     conductor.Celular = usuario.celular.ToString();
                     ObjUsuarios.Add(conductor);
-                }
-                dgUsuarios.ItemsSource = ObjUsuarios;
+                }*/
+                dgUsuarios.ItemsSource = usuarios;
             }
             catch (Exception ex)
             {
@@ -66,7 +66,7 @@ namespace Gestor_de_Siniestros.Views
 
         private void actualizar_Click(object sender, RoutedEventArgs e)
         {
-            ConductorModel idSelected = (ConductorModel)dgUsuarios.SelectedItem;
+            Usuarios idSelected = (Usuarios)dgUsuarios.SelectedItem;
             ModificarUsuarioView modificarView = new ModificarUsuarioView();
             if (idSelected == null)
             {
@@ -74,7 +74,7 @@ namespace Gestor_de_Siniestros.Views
             }
             else
             {
-                modificarView.LoadData(idSelected.id);
+                modificarView.LoadData(idSelected);
                 modificarView.ShowDialog();
             }
         }
@@ -82,7 +82,15 @@ namespace Gestor_de_Siniestros.Views
 
         private void visualizar_Click(object sender, RoutedEventArgs e)
         {
-            ConductorModel idSelectedUser = (ConductorModel)dgUsuarios.SelectedItem;
+            Usuarios idSelectedUser = (Usuarios)dgUsuarios.SelectedItem;
+            var usuarioEnvio = new ConductorModel();
+            usuarioEnvio.Apellido = idSelectedUser.aPaterno + " " + idSelectedUser.aMaterno;
+            usuarioEnvio.Celular = idSelectedUser.celular.ToString();
+            usuarioEnvio.Nombre = idSelectedUser.nombre;
+            usuarioEnvio.id = idSelectedUser.idUsuario;
+            usuarioEnvio.Fecha = idSelectedUser.fechaNacimiento.ToString("MMMM dd, yyyy");
+            usuarioEnvio.Licencia = idSelectedUser.idLicencia;
+
             VerUsuarioView usuarioView = new VerUsuarioView();
             if (idSelectedUser == null)
             {
@@ -91,7 +99,7 @@ namespace Gestor_de_Siniestros.Views
             }
             else
             {
-                usuarioView.LoadData(idSelectedUser);
+                usuarioView.LoadData(usuarioEnvio);
                 usuarioView.ShowDialog();
             }
         }

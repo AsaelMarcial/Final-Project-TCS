@@ -23,7 +23,6 @@ namespace Gestor_de_Siniestros.Views
             UsuariosList = new List<Usuarios>();
             usuariosService = new UsuariosService();
             ObjUsuarios = new List<ConductorModel>();
-            LoadData();
         }
 
         internal void LoadData()
@@ -72,12 +71,6 @@ namespace Gestor_de_Siniestros.Views
             }
         }
 
-        public void actualizaInformacion(string operacion)
-        {
-            dgConductores.ItemsSource = null;
-            this.LoadData();
-        }
-
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
             String texto = textBusqueda.Text;
@@ -91,7 +84,8 @@ namespace Gestor_de_Siniestros.Views
             {
                 foreach (var conductor in ObjUsuarios)
                 {
-                    if (conductor.Nombre.ToLower().Contains(textBusqueda.Text.ToLower())){
+                    if (conductor.Nombre.ToLower().Contains(textBusqueda.Text.ToLower()))
+                    {
                         listaFiltrada.Add(conductor);
                     }
                 }
@@ -115,6 +109,13 @@ namespace Gestor_de_Siniestros.Views
                 usuarioView.ShowDialog();
             }
             
+        }
+
+        public void actualizaInformacion(string operacion)
+        {
+            ObjUsuarios.Clear();
+            dgConductores.ItemsSource = null;
+            LoadData();
         }
     }
 }
